@@ -11,6 +11,14 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+
+
+
+Route::group(['prefix' => '/admin','namespace' => 'Admin'],function(){
+    Route::get('','IndexController@index');//后台首页
+    Route::get('Index/left','IndexController@left');//后台首页
+    Route::get('Index/top','IndexController@top');
+    Route::get('Index/main','IndexController@main');
+
 });
+
