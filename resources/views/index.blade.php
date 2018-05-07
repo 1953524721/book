@@ -8,12 +8,12 @@
 <link href="{{asset('index/css/templatemo_style.css')}}" rel="stylesheet" type="text/css" />
 <style>
     .search{
-    width:210px;
+    width:310px;
     height:30px;
     border:1px solid #1B1B1B;
     float: right;
     margin-top:98px;
-    margin-right:30px;
+    /* margin-right:30px; */
 }
 </style>
 </head>
@@ -102,7 +102,7 @@
 
             <div class="templatemo_product_box">
                 <h1>Gardening <span>(by Famous Author)</span></h1>
-          <img src="images/templatemo_image_03.jpg" alt="image" />
+          <img src="{{asset('index/images/templatemo_image_01.jpg')}}" alt="image" />
                 <div class="product_info">
                     <p>Ut fringilla enim sed turpis. Sed justo dolor, convallis at.</p>
                     <h3>$65</h3>
@@ -116,7 +116,7 @@
 
             <div class="templatemo_product_box">
                 <h1>Sushi Book  <span>(by Japanese Name)</span></h1>
-                <img src="images/templatemo_image_04.jpg" alt="image" />
+                <img src="{{asset('index/images/templatemo_image_01.jpg')}}" alt="image" />
                 <div class="product_info">
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
                     <h3>$45</h3>
