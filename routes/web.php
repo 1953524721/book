@@ -12,7 +12,7 @@
 */
 
 
-<<<<<<< HEAD
+
 
 
 Route::group(['prefix' => '/admin','namespace' => 'Admin'],function(){
@@ -23,6 +23,6 @@ Route::group(['prefix' => '/admin','namespace' => 'Admin'],function(){
 
 });
 
-=======
+
 Route::get('','IndexController@index');//后台首页
->>>>>>> 002b07eaeae82220ffc71426b84407b69427fa93
+
