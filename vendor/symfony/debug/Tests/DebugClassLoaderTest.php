@@ -55,7 +55,7 @@ class DebugClassLoaderTest extends \PHPUnit_Framework_TestCase
             }
         }
 
-        $this->fail('DebugClassLoader did not register');
+        $this->fail('DebugClassLoader did not Register');
     }
 
     public function testUnsilencing()

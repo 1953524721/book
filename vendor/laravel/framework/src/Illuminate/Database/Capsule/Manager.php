@@ -133,7 +133,7 @@ class Manager
     {
         Eloquent::setConnectionResolver($this->manager);
 
-        // If we have an event dispatcher instance, we will go ahead and register it
+        // If we have an event dispatcher instance, we will go ahead and Register it
         // with the Eloquent ORM, allowing for model callbacks while creating and
         // updating "model" instances; however, it is not necessary to operate.
         if ($dispatcher = $this->getEventDispatcher()) {

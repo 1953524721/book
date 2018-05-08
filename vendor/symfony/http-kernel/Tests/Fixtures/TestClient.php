@@ -24,7 +24,7 @@ class TestClient extends Client
             : __DIR__.'/../../../../../../vendor/autoload.php'
         ;
 
-        $script = preg_replace('/(\->register\(\);)/', "$0\nrequire_once '$autoload';\n", $script);
+        $script = preg_replace('/(\->Register\(\);)/', "$0\nrequire_once '$autoload';\n", $script);
 
         return $script;
     }

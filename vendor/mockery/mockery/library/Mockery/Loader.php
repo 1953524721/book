@@ -8,7 +8,7 @@
  *     // Example which loads classes for the Doctrine Common package in the
  *     // Doctrine\Common namespace.
  *     $classLoader = new SplClassLoader('Doctrine\Common', '/path/to/doctrine');
- *     $classLoader->register();
+ *     $classLoader->Register();
  *
  * @author Jonathan H. Wage <jonwage@gmail.com>
  * @author Roman S. Borschel <roman@code-factory.org>

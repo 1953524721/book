@@ -60,14 +60,14 @@ class ProviderRepository
             $manifest = $this->compileManifest($providers);
         }
 
-        // Next, we will register events to load the providers for each of the events
+        // Next, we will Register events to load the providers for each of the events
         // that it has requested. This allows the service provider to defer itself
         // while still getting automatically loaded when a certain event occurs.
         foreach ($manifest['when'] as $provider => $events) {
             $this->registerLoadEvents($provider, $events);
         }
 
-        // We will go ahead and register all of the eagerly loaded providers with the
+        // We will go ahead and Register all of the eagerly loaded providers with the
         // application so their services can be registered with the application as
         // a provided service. Then we will set the deferred service list on it.
         foreach ($manifest['eager'] as $provider) {

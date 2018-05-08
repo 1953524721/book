@@ -104,7 +104,7 @@ class ErrorHandler
     /**
      * Registers the error handler.
      *
-     * @param self|null $handler The handler to register
+     * @param self|null $handler The handler to Register
      * @param bool      $replace Whether to replace or not any existing handler
      *
      * @return self The registered error handler

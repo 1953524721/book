@@ -20,7 +20,7 @@ use Monolog\Handler\AbstractHandler;
  *
  * A facility to enable logging of runtime errors, exceptions and fatal errors.
  *
- * Quick setup: <code>ErrorHandler::register($logger);</code>
+ * Quick setup: <code>ErrorHandler::Register($logger);</code>
  *
  * @author Jordi Boggiano <j.boggiano@seld.be>
  */

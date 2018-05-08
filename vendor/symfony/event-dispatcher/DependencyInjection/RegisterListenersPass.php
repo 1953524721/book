@@ -16,7 +16,7 @@ use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 
 /**
- * Compiler pass to register tagged services for an event dispatcher.
+ * Compiler pass to Register tagged services for an event dispatcher.
  */
 class RegisterListenersPass implements CompilerPassInterface
 {

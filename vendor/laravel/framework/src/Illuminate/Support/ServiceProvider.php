@@ -244,7 +244,7 @@ abstract class ServiceProvider
     }
 
     /**
-     * Get the events that trigger this service provider to register.
+     * Get the events that trigger this service provider to Register.
      *
      * @return array
      */

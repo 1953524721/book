@@ -19,7 +19,7 @@ use Webmozart\Assert\Assert;
  */
 final class Author extends BaseTag implements Factory\StaticMethod
 {
-    /** @var string register that this is the author tag. */
+    /** @var string Register that this is the author tag. */
     protected $name = 'author';
 
     /** @var string The name of the author */

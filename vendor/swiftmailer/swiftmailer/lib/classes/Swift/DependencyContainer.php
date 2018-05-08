@@ -156,7 +156,7 @@ class Swift_DependencyContainer
     /**
      * Specify the previously registered item as a literal value.
      *
-     * {@link register()} must be called before this will work.
+     * {@link Register()} must be called before this will work.
      *
      * @param mixed $value
      *
@@ -190,7 +190,7 @@ class Swift_DependencyContainer
     /**
      * Specify the previously registered item as a new instance of $className.
      *
-     * {@link register()} must be called before this will work.
+     * {@link Register()} must be called before this will work.
      * Any arguments can be set with {@link withDependencies()},
      * {@link addConstructorValue()} or {@link addConstructorLookup()}.
      *
@@ -212,7 +212,7 @@ class Swift_DependencyContainer
     /**
      * Specify the previously registered item as a shared instance of $className.
      *
-     * {@link register()} must be called before this will work.
+     * {@link Register()} must be called before this will work.
      *
      * @param string $className
      *
@@ -316,7 +316,7 @@ class Swift_DependencyContainer
         return $reflector->newInstance();
     }
 
-    /** Create and register a shared instance of $itemName */
+    /** Create and Register a shared instance of $itemName */
     private function _createSharedInstance($itemName)
     {
         if (!isset($this->_store[$itemName]['instance'])) {
@@ -331,7 +331,7 @@ class Swift_DependencyContainer
     {
         if (!isset($this->_endPoint)) {
             throw new BadMethodCallException(
-                'Component must first be registered by calling register()'
+                'Component must first be registered by calling Register()'
                 );
         }
 

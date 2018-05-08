@@ -76,7 +76,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers ::register
+     * @covers ::Register
      */
     public function testRegister()
     {

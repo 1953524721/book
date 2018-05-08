@@ -9,7 +9,7 @@
  */
 
 /**
- * Interface for builders which can register builders with a given identification.
+ * Interface for builders which can Register builders with a given identification.
  *
  * This interface relates to PHPUnit_Framework_MockObject_Builder_Identity.
  *

@@ -72,11 +72,11 @@ interface TagFactory
     /**
      * Registers a handler for tags.
      *
-     * If you want to use your own tags then you can use this method to instruct the TagFactory to register the name
+     * If you want to use your own tags then you can use this method to instruct the TagFactory to Register the name
      * of a tag with the FQCN of a 'Tag Handler'. The Tag handler should implement the {@see Tag} interface (and thus
      * the create method).
      *
-     * @param string $tagName Name of tag to register a handler for. When registering a namespaced tag, the full
+     * @param string $tagName Name of tag to Register a handler for. When registering a namespaced tag, the full
      *                        name, along with a prefixing slash MUST be provided.
      * @param string $handler FQCN of handler.
      *

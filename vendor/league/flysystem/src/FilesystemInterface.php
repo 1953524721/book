@@ -268,7 +268,7 @@ interface FilesystemInterface
     /**
      * Register a plugin.
      *
-     * @param PluginInterface $plugin The plugin to register.
+     * @param PluginInterface $plugin The plugin to Register.
      *
      * @return $this
      */

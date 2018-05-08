@@ -95,7 +95,7 @@ class Worker
             }
 
             // First, we will attempt to get the next job off of the queue. We will also
-            // register the timeout handler and reset the alarm for this job so it is
+            // Register the timeout handler and reset the alarm for this job so it is
             // not stuck in a frozen state forever. Then, we can fire off this job.
             $job = $this->getNextJob(
                 $this->manager->connection($connectionName), $queue
@@ -129,7 +129,7 @@ class Worker
     protected function registerTimeoutHandler($job, WorkerOptions $options)
     {
         if ($options->timeout > 0 && $this->supportsAsyncSignals()) {
-            // We will register a signal handler for the alarm signal so that we can kill this
+            // We will Register a signal handler for the alarm signal so that we can kill this
             // process if it is running too long because it has frozen. This uses the async
             // signals supported in recent versions of PHP to accomplish it conveniently.
             pcntl_signal(SIGALRM, function () {

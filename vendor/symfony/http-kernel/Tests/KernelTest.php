@@ -652,7 +652,7 @@ EOF;
 
     /**
      * @expectedException \LogicException
-     * @expectedExceptionMessage Trying to register two bundles with the same name "DuplicateName"
+     * @expectedExceptionMessage Trying to Register two bundles with the same name "DuplicateName"
      */
     public function testInitializeBundleThrowsExceptionWhenRegisteringTwoBundlesWithTheSameName()
     {
@@ -762,7 +762,7 @@ EOF;
      * Returns a mock for the abstract kernel.
      *
      * @param array $methods Additional methods to mock (besides the abstract ones)
-     * @param array $bundles Bundles to register
+     * @param array $bundles Bundles to Register
      *
      * @return Kernel
      */

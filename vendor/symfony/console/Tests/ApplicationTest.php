@@ -115,7 +115,7 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
     {
         $application = new Application();
         $command = $application->register('foo');
-        $this->assertEquals('foo', $command->getName(), '->register() registers a new command');
+        $this->assertEquals('foo', $command->getName(), '->Register() registers a new command');
     }
 
     public function testAdd()

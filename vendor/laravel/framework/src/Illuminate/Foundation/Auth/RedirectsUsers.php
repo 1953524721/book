@@ -5,7 +5,7 @@ namespace Illuminate\Foundation\Auth;
 trait RedirectsUsers
 {
     /**
-     * Get the post register / login redirect path.
+     * Get the post Register / login redirect path.
      *
      * @return string
      */

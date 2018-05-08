@@ -88,7 +88,7 @@ class MailServiceProvider extends ServiceProvider
     {
         $this->registerSwiftTransport();
 
-        // Once we have the transporter registered, we will register the actual Swift
+        // Once we have the transporter registered, we will Register the actual Swift
         // mailer instance, passing in the transport instances, which allows us to
         // override this transporter instances during app start-up if necessary.
         $this->app->singleton('swift.mailer', function ($app) {

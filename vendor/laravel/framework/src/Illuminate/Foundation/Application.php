@@ -564,7 +564,7 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
             $provider = $this->resolveProvider($provider);
         }
 
-        if (method_exists($provider, 'register')) {
+        if (method_exists($provider, 'Register')) {
             $provider->register();
         }
 
@@ -626,7 +626,7 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
      */
     public function loadDeferredProviders()
     {
-        // We will simply spin through each of the deferred providers and register each
+        // We will simply spin through each of the deferred providers and Register each
         // one and boot them if the application has booted. This should make each of
         // the remaining services available to this application for immediate use.
         foreach ($this->deferredServices as $service => $provider) {
@@ -651,7 +651,7 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
         $provider = $this->deferredServices[$service];
 
         // If the service provider has not already been loaded and registered we can
-        // register it with the application and remove the service from this list
+        // Register it with the application and remove the service from this list
         // of deferred services, since it will already be loaded on subsequent.
         if (! isset($this->loadedProviders[$provider])) {
             $this->registerDeferredProvider($provider, $service);

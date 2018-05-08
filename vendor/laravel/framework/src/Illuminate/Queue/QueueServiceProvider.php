@@ -48,7 +48,7 @@ class QueueServiceProvider extends ServiceProvider
     protected function registerManager()
     {
         $this->app->singleton('queue', function ($app) {
-            // Once we have an instance of the queue manager, we will register the various
+            // Once we have an instance of the queue manager, we will Register the various
             // resolvers for the queue connectors. These connectors are responsible for
             // creating the classes that accept queue configs and instantiate queues.
             return tap(new QueueManager($app), function ($manager) {

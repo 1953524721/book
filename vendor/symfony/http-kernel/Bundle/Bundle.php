@@ -52,7 +52,7 @@ abstract class Bundle implements BundleInterface
      *
      * It is only ever called once when the cache is empty.
      *
-     * This method can be overridden to register compilation passes,
+     * This method can be overridden to Register compilation passes,
      * other extensions, ...
      *
      * @param ContainerBuilder $container A ContainerBuilder instance
@@ -169,7 +169,7 @@ abstract class Bundle implements BundleInterface
         }
 
         if (!class_exists('Symfony\Component\Finder\Finder')) {
-            throw new \RuntimeException('You need the symfony/finder component to register bundle commands.');
+            throw new \RuntimeException('You need the symfony/finder component to Register bundle commands.');
         }
 
         $finder = new Finder();

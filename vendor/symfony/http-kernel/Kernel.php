@@ -403,7 +403,7 @@ abstract class Kernel implements KernelInterface, TerminableInterface
         foreach ($this->registerBundles() as $bundle) {
             $name = $bundle->getName();
             if (isset($this->bundles[$name])) {
-                throw new \LogicException(sprintf('Trying to register two bundles with the same name "%s"', $name));
+                throw new \LogicException(sprintf('Trying to Register two bundles with the same name "%s"', $name));
             }
             $this->bundles[$name] = $bundle;
 
