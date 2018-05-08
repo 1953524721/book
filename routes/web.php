@@ -99,6 +99,10 @@ Route::get('','IndexController@index');//后台首页
 
 Route::group(["prefix"=>'/user',"namespace"=>"User"],function (){
     Route::get("info","UserController@info");
+    Route::get("update","UserController@update");
+    Route::post("up","UserController@up");
+    Route::get("reading","UserController@reading");
+    Route::get("session","UserController@session");
 });
 
 
