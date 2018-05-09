@@ -8,30 +8,87 @@
 
 namespace App\Http\Controllers\Register;
 use App\Http\Controllers\Controller;
-
+use App\Model\RegisterModel;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Illuminate\Support\Facades\Input;
+use DB;
 class RegisterController  extends Controller {
     //注册显示页面
+    public  $Model;
+    public  $Session;
+    public function __construct(){
+        $this->Model   = new  RegisterModel();
+        $this->Session = new Session();
+    }
     public function index(){
+        //前台注册页面！
         return view("Register/register");
     }
     public function Register(){
-        $phone  =  Input::get("pNum");
+        //ajax接值
+        $phone   =  Input::get("pNum");
+        //调用M层历史数据
+        $getCode =  $this->Model->getCode($phone);
+        //不等于空
+        if(!empty($getCode)){
+            //获取当前时间-历史添加时间
+            $ifTime = time() - $getCode->add_time  ;
+            //小于30秒频繁操作
+            if($ifTime<=30){
+                exit(json_encode(array("e"=>0,"m"=>"操作过于频繁。30秒后再试")));
+            }
+        }
+        //调用短信接口
         $res  = $this->phone($phone);
+        //判断是否成功
         if($res[1]!="OK"){
             exit(json_encode(array("e"=>1,"m"=>"发送失败请稍后再试")));
         }else{
+            //添加入库
             $insertCodeArr = array(
                 "add_time"=>time(),
                 "code_num"=>$res['code_num'],
                 "phone_num"=>$phone
             );
-            print_r($insertCodeArr);die;
+            $this->Model->insertCode($insertCodeArr);
+            exit(json_encode(array("e"=>"yes","m"=>"发送成功。请验证")));
+        }
+    }
+    //注册执行页面
+    public function OnlyUser(){
+        $UserName   =  Input::get("user_name");
+        $UserArr =  $this->Model->getUserName($UserName);
+        if(empty($UserArr)){
+            exit(json_encode(array("e"=>"0","m"=>"可以使用")));
+        }else{
+            exit(json_encode(array("e"=>"1","m"=>"用户名已经存在")));
         }
 
-
+    }
+    public function RegisterDo(){
+        $post  =  Input::get();
+        $getCode =  $this->Model->getCode($post['pNum']);
+        if(empty($getCode)){
+            exit(json_encode(array("e"=>"10","m"=>"请发送验证码")));
+        }else{
+           if($post['code_num']!=$getCode->code_num){
+               exit(json_encode(array("e"=>"11","m"=>"验证码错误")));
+           }
+        }
+        $insert = array(
+            "user_name"=>$post['user_name'],
+            "user_pwd"=>strrev(md5(hash("sha512",$post['user_pwd'])))
+        );
+        $res =  $this->Model->insertUser($insert);
+        if($res){
+            $this->Model-> upPcode($getCode->code_id);
+            exit(json_encode(array("e"=>"1","m"=>"注册成功")));
+        }else{
+            exit(json_encode(array("e"=>"2","m"=>"注册失败")));
+        }
 
     }
+
 
 
 
