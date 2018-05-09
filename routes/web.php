@@ -137,8 +137,9 @@ Route::group(["prefix"=>'/user',"namespace"=>"User"],function (){
 
 Route::group(["prefix"=>'/Register',"namespace"=>"Register"],function (){
     Route::get("index","RegisterController@index");
+    Route::POST("Register","RegisterController@Register");
+    Route::get("phone","RegisterController@phone");
 });
-
 
 
 
