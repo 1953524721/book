@@ -10,8 +10,7 @@
         tr{height: 50px;}
         .a{width: 75%;height: 100px;background-color: red;}
         .input-text{height: 40px; width: 75%;}
-        .input-text,
-        #eamil{
+        .input-text, #eamil,inpu{
             border: 1px solid #bac7d2;
             background: #f7fcfe;/* #f7fcfe #f3fafd*/
             border-radius: 2px;
@@ -22,87 +21,58 @@
 </head>
 <body>
 <center>
-<div class="a"><h1>个人信息</h1></div>
+<div class="a"><h1>个人信息修改</h1></div>
 <div id="table" class="mt10">
 <div class="box span10 oh">
 <form action="up" method="post" enctype="multipart/form-data">
-    <input type="hidden" name="_token" value="<?= csrf_token(); ?>">
-    <table width="75%" border="1" cellpadding="0" cellspacing="0" class="list_table">
-        <tr>
-            <th width="300">工作</th>
-            <td><input type="text" class="input-text lh30" name="work" value="<?= $data->info_work?>"></td>
-        </tr>
-        <tr>
-            <th width="300">生日</th>
-            <td><input type="date" name="birthday"></td>
-        </tr>
-        <tr>
-            <th width="300">学校</th>
-            <td><input type="text" class="input-text lh30" name="school" value="<?= $data->info_school?>"></td>
-        </tr>
-        <tr>
-            <th width="300">邮箱</th>
-            <td><input type="eamil" id="eamil" class="input-text lh30" name="eamil" value="<?= $data->info_email?>"></td>
-        </tr>
-        <tr>
-            <th width="300">手机号</th>
-            <td><input type="tel"  class="input-text lh30" name="iphone" id="phone" value="<?= $data->info_iphone?>"><sapn id="phone"></sapn></td>
-        </tr>
-        <tr>
-            <th width="300">个性签名</th>
-            <td><input type="text"  class="input-text lh30" name="autograph" maxlength="200" minlength="4" value="<?= $data->info_autograph?>"></td>
-        </tr>
-        <tr>
-            <th width="300">个人说明</th>
-            <td><input type="text"  class="input-text lh30" name="explain" maxlength="200" minlength="4" value="<?= $data->info_explain?>"></td>
-        </tr>
-        <tr>
-            <td class="td_right"></td>
-            <td class="">
-                <input type="submit" name="" class="btn btn82 btn_save2" value="保存">
-                <input type="reset" name="" class="btn btn82 btn_res" value="重置">
-            </td>
-        </tr>
-    </table>
+<input type="hidden" name="_token" value="<?= csrf_token(); ?>">
+<table width="75%" border="1" cellpadding="0" cellspacing="0" class="list_table">
+<tr>
+    <th width="300">工作</th>
+    <td><input type="text" class="input-text lh30" name="work" value="<?= $data->info_work?>"
+        placeholder="工作"></td>
+</tr>
+<tr>
+    <th width="300">生日</th>
+    <td><input type="date" name="birthday" value="<?= $data->info_birthday?>"></td>
+</tr>
+<tr>
+    <th width="300">学校</th>
+    <td><input type="text" class="input-text lh30" name="school" placeholder="学校" value="<?= $data->info_school?>" maxlength="20" minlength="2"></td>
+</tr>
+<tr>
+    <th width="300">邮箱</th>
+    <td><input type="eamil" id="eamil" class="input-text lh30" placeholder="邮箱" name="eamil" value="<?= $data->info_email?>">
+        <span class="eamil"></span>
+    </td>
+</tr>
+<tr>
+    <th width="300">手机号</th>
+    <td><input type="tel"  class="input-text lh30" name="iphone" placeholder="邮箱" id="phone" value="<?= $data->info_iphone?>">
+        <sapn class="phone"></sapn></td>
+</tr>
+<tr>
+    <th width="300">个性签名</th>
+    <td><input type="text"  class="input-text lh30" name="autograph" placeholder="个性签名" maxlength="200" minlength="4" value="<?= $data->info_autograph?>"></td>
+</tr>
+<tr>
+    <th width="300">个人说明</th>
+    <td><input type="text"  class="input-text lh30" name="explain" placeholder="个人说明" maxlength="200" minlength="4" value="<?= $data->info_explain?>"></td>
+</tr>
+<tr>
+    <td class="td_right"></td>
+    <td class="">
+        <input type="submit" name="" class="btn btn82 btn_save2" value="保存">
+        <input type="reset" name="" class="btn btn82 btn_res" value="重置">
+    </td>
+</tr>
+</table>
 </form>
-
 </div>
 </div>
 </center>
 </body>
 <script language="JavaScript" src="{{ URL::asset('/') }}jq.js"></script>
-<script type="text/javascript">
-
-    $("#gai").on("click",function () {
-        location.href=("update");
-    })
-    function isPhone(phone)
-    {
-        var pattern = /^1[34578]\d{9}$/;
-        return pattern.test(phone);
-    }
-    if($.trim($("#phone")).val().length == 0)
-    {
-        $("#phone").html("不合法")
-        $("#phone").focus();
-    }
-    else
-    {
-        if(isPhone($.trim($("#phone")).val())== false)
-        {
-            $("#phone").html("不合法")
-            $("#phone").focus();
-        }
-    }
-    // $("#tel").on("blur",function () {
-    //     var reg   = "/^1[3|4|5|7|8][0-9]\d{4,8}$/";
-    //     var tel   = $(this).val();
-    //     var _this = $(this);
-    //     if(tel==null || tel == "" || !reg.exec(tel))
-    //     {
-    //         _this.next().html("不合法");
-    //     }
-    // })
-</script>
+<script type="text/javascript" src="{{URL::asset('/')}}js/update.js"></script>
 </html>
 

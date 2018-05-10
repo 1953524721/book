@@ -6,23 +6,15 @@
     <title>个人信息页</title>
     <link rel="stylesheet" href="{{asset('admins/user_info/common.css')}}">
     <link rel="stylesheet" href="{{asset('admins/user_info/main.css')}}">
-    <style>
-        body{background-color: #F2EBE5}
-        tr{height: 50px;}
-        .a{width: 75%;height: 100px;background-color: #8D6661;}
-        .a1{width: 75%;height: 50%;background-color: blue;}
-        .a2{width: 75%;height: 50%;background-color: yellow;}
-        .a_21{width: 33.3%;height: 100%;background-color:pink;float: left;line-height: 50px}
-    </style>
 </head>
 <body>
 <center>
 <div class="a">
     <div class="a1"><h1>个人信息</h1></div>
     <div class="a2">
-        <div class="a_21"><span></span></div>
+        <div class="a_21"><span style="cursor: pointer;color: red">修改密码</span></div>
         <div class="a_21"><span style="cursor: pointer" class="jie">借书历史</span></div>
-        <div class="a_21"></div>
+        <div class="a_21"><span style="cursor: pointer"></span></div>
     </div>
 </div>
 <div id="table" class="mt10">
@@ -30,31 +22,45 @@
     <table width="75%" id="tbStu" border="1" cellpadding="0" cellspacing="0" class="list_table">
         <tr>
             <th width="300">工作</th>
-            <td><?= $data->info_work?></td>
+            <td>
+                @if(empty($data->info_work))<span class="color">未填写</span>@else{{$data->info_work}}@endif
+            </td>
         </tr>
         <tr>
             <th width="300">生日</th>
-            <td><?= $data->info_birthday?></td>
+            <td>
+                @if(empty($data->info_birthday))<span class="color">未填写</span>@else{{$data->info_birthday}}@endif
+            </td>
         </tr>
         <tr>
             <th width="300">学校</th>
-            <td><?= $data->info_school?></td>
+            <td>
+                @if(empty($data->info_school))<span class="color">未填写</span>@else{{$data->info_school}}@endif
+            </td>
         </tr>
         <tr>
             <th width="300">邮箱</th>
-            <td><?= $data->info_email?></td>
+            <td>
+                @if(empty($data->info_email))<span class="color">未填写</span>@else{{$data->info_email}}@endif
+            </td>
         </tr>
         <tr>
             <th width="300">手机号</th>
-            <td><?= $data->info_iphone?></td>
+            <td>
+                @if(empty($data->info_iphone))<span class="color">未填写</span>@else{{$data->info_iphone}}@endif
+            </td>
         </tr>
         <tr>
             <th width="300">个性签名</th>
-            <td><?= $data->info_autograph?></td>
+            <td>
+                @if(empty($data->info_autograph))<span class="color">未填写</span>@else{{$data->info_autograph}}@endif
+            </td>
         </tr>
         <tr>
             <th width="300">个性说明</th>
-            <td><?= $data->info_explain?></td>
+            <td>
+                @if(empty($data->info_autograph))<span class="color">未填写</span>@else{{$data->info_explain}}@endif
+            </td>
         </tr>
         <tr>
             <td class="td_right"></td>

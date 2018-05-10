@@ -97,15 +97,13 @@ Route::get('','IndexController@index');//后台首页
 
 
 
-Route::group(["prefix"=>'/user',"namespace"=>"User"],function (){
-    Route::get("","UserController@info");
-    Route::get("update","UserController@update");
-    Route::post("up","UserController@up");
-    Route::get("reading","UserController@reading");
-    Route::get("session","UserController@session");
-});
-
-
+    Route::get("user/info","UserController@info");
+    Route::get("user/update","UserController@update");
+    Route::post("user/up","UserController@up");
+    Route::get("user/reading","UserController@reading");
+    Route::get("user/session","UserController@session");
+    Route::post("user/turn","UserController@turn");
+    Route::get("user/examine","UserController@examine");
 
 
 
