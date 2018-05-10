@@ -100,6 +100,7 @@ Route::get('','IndexController@index');//后台首页
     Route::get("user/info","UserController@info");
     Route::get("user/update","UserController@update");
     Route::post("user/up","UserController@up");
+    Route::post("user/insd","UserController@insd");
     Route::get("user/reading","UserController@reading");
     Route::get("user/session","UserController@session");
     Route::post("user/turn","UserController@turn");
