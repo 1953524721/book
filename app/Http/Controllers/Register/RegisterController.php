@@ -20,13 +20,21 @@ class RegisterController  extends Controller {
         $this->Model   = new  RegisterModel();
         $this->Session = new Session();
     }
+    function xss($type)
+    {
+        $str = trim($type);              //清理空格
+        $str = strip_tags($str);         //过滤html标签
+        $str = htmlspecialchars($str);   //将字符内容转化为html实体
+        $str = addslashes($str);
+        return $str;
+    }
     public function index(){
         //前台注册页面！
         return view("Register/register");
     }
     public function Register(){
         //ajax接值
-        $phone   =  Input::get("pNum");
+        $phone   =  $this->xss(Input::get("pNum"));
         //调用M层历史数据
         $getCode =  $this->Model->getCode($phone);
         //不等于空
@@ -56,7 +64,7 @@ class RegisterController  extends Controller {
     }
     //注册执行页面
     public function OnlyUser(){
-        $UserName   =  Input::get("user_name");
+        $UserName   =  $this->xss(Input::get("user_name"));
         $UserArr =  $this->Model->getUserName($UserName);
         if(empty($UserArr)){
             exit(json_encode(array("e"=>"0","m"=>"可以使用")));
@@ -65,22 +73,31 @@ class RegisterController  extends Controller {
         }
 
     }
+    //添加页面
     public function RegisterDo(){
-        $post  =  Input::get();
+        $allArr  =  Input::get();
+        foreach ($allArr as $key =>$val){
+            $post[$key] = $this->xss($val);
+        }
+        //读取发送验证码！
         $getCode =  $this->Model->getCode($post['pNum']);
         if(empty($getCode)){
             exit(json_encode(array("e"=>"10","m"=>"请发送验证码")));
         }else{
+            //判断验证码
            if($post['code_num']!=$getCode->code_num){
                exit(json_encode(array("e"=>"11","m"=>"验证码错误")));
            }
         }
+        //添加入库
         $insert = array(
             "user_name"=>$post['user_name'],
             "user_pwd"=>strrev(md5(hash("sha512",$post['user_pwd'])))
         );
+        //入库
         $res =  $this->Model->insertUser($insert);
         if($res){
+            //修改验证码状态
             $this->Model-> upPcode($getCode->code_id);
             exit(json_encode(array("e"=>"1","m"=>"注册成功")));
         }else{

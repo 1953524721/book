@@ -12,21 +12,8 @@
 Route::group(['prefix' => '/admin','namespace' => 'Admin'],function(){
     Route::get('','IndexController@index');//后台首页
     Route::get('Index/left','IndexController@left');//后台首页
-
-    Route::match(['post','get'],'Login/login','LoginController@login');//后台登录
-    Route::match(['post','get'],'Classify/classify','ClassifyController@classify');//图书分类
-    Route::match(['post','get'],'Classify/show','ClassifyController@show');//图书分类展示
-    Route::get('Classify/delete/{id}','ClassifyController@delete');//图书分类删除
-
-
-    Route::match(['post','get'],'Admins/add','AdminsController@add');//后台管理员添加
-    Route::match(['post','get'],'Admins/show','AdminsController@show');//后台管理员展示
     Route::get('Index/top','IndexController@top');
     Route::get('Index/main','IndexController@main');
-    Route::match(['post','get'],'Book/add','BookController@add');
-    Route::match(['post','get'],'Book/show','BookController@show');
-    Route::match(['post','get'],'Book/del','BookController@del');
-    Route::match(['post','get'],'Book/update','BookController@update');
 
 });
 Route::get('','IndexController@index');//后台首页
@@ -111,7 +98,7 @@ Route::get('','IndexController@index');//后台首页
 
 
 Route::group(["prefix"=>'/user',"namespace"=>"User"],function (){
-    Route::get("info","UserController@info");
+    Route::get("","UserController@info");
     Route::get("update","UserController@update");
     Route::post("up","UserController@up");
     Route::get("reading","UserController@reading");
@@ -158,6 +145,7 @@ Route::group(["prefix"=>'/Register',"namespace"=>"Register"],function (){
 });
 Route::group(["prefix"=>'/Login',"namespace"=>"Login"],function (){
     Route::get("index","LoginController@index");
+    Route::post("Login","LoginController@Login");
 });
 
 

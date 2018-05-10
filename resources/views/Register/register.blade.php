@@ -227,16 +227,11 @@
         getPwd();
         getUser();
         getPhone();
-
-        $("#sendCode").trigger("click");
-
-
-
-            var  user_name   = $("#user_name").val();
+        // $("#sendCode").trigger("click");
+        var  user_name   = $("#user_name").val();
         var  user_pwd    = $("#user_pwd").val();
         var  code_num    = $("#code_num").val();
         var       pNum   = $("#phone_code").val();
-
         if(a==1){
             $.ajax({
                 type: "POST",
