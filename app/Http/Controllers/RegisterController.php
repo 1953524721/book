@@ -6,7 +6,7 @@
  * @Last Modified time: 2018-05-07 11:02:53
  */
 
-namespace App\Http\Controllers\Register;
+namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Model\RegisterModel;
 use Symfony\Component\HttpFoundation\Session\Session;

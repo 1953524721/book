@@ -135,18 +135,15 @@ Route::group(["prefix"=>'/user',"namespace"=>"User"],function (){
 
 
 
-Route::group(["prefix"=>'/Register',"namespace"=>"Register"],function (){
-    Route::get("index","RegisterController@index");
-    Route::POST("Register","RegisterController@Register");
-    Route::get("phone","RegisterController@phone");
-    Route::POST("RegisterDo","RegisterController@RegisterDo");
-    Route::POST("OnlyUser","RegisterController@OnlyUser");
+    Route::get("Register/index","RegisterController@index");
+    Route::POST("Register/Register","RegisterController@Register");
+    Route::get("Register/phone","RegisterController@phone");
+    Route::POST("Register/RegisterDo","RegisterController@RegisterDo");
+    Route::POST("Register/OnlyUser","RegisterController@OnlyUser");
 
-});
-Route::group(["prefix"=>'/Login',"namespace"=>"Login"],function (){
-    Route::get("index","LoginController@index");
-    Route::post("Login","LoginController@Login");
-});
+    Route::get("Login/index","LoginController@index");
+    Route::post("Login/Login","LoginController@Login");
+
 
 
 

@@ -240,6 +240,7 @@
                 dataType:"json",
                 success: function(msg){
                     if(msg.e==1){
+                        alert("注册成功")
                         location.href ="{{url('Login/index')}}";
                     }else{
                         alert(msg.m)
