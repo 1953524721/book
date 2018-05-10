@@ -29,7 +29,7 @@
 <table width="75%" border="1" cellpadding="0" cellspacing="0" class="list_table">
 <tr>
     <th width="300">工作</th>
-    <td><input type="text" class="input-text lh30" name="work" value="<?= $data->info_work?>"
+    <td><input type="text" class="input-text lh30" name="work" value="{{$data->info_work}}"
         placeholder="工作"></td>
 </tr>
 <tr>

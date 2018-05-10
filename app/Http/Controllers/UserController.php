@@ -16,9 +16,8 @@ class UserController extends Controller
      */
     public function info()
     {
-//        $session = new Session();
-//        $id = $session->get("id");
-        $id = "1";
+        $session = new Session();
+        $id = $session->get("user_id");
         $data = DB::table("book_user_info")->where("user_id", $id)->first();
         // print_r($data);die();
         return view("user/info", array("data" => $data));
@@ -31,13 +30,11 @@ class UserController extends Controller
      */
     public function update()
     {
-//        $session = new Session();
-//        $id = $session->get("id");
-        $id = "1";
+        $session = new Session();
+        $id = $session->get("user_id");
         $data = DB::table("book_user_info")->where("user_id", $id)->first();
         return view("user/update", array("data" => $data));
     }
-
     function xss($type)
     {
         $str = trim($type);              //清理空格
@@ -54,11 +51,9 @@ class UserController extends Controller
      */
     public function up(Request $request)
     {
-//        $session = new Session();
-//        $id = $session->get("id");
+        $session = new Session();
+        $id = $session->get("user_id");
         $rest = $request->input();
-        $id = "2";
-    
         $data['info_birthday']  = $this->xss($rest['birthday']);
         $data['info_work']      = $this->xss($rest['work']);
         $data['info_school']    = $this->xss($rest['school']);
@@ -81,9 +76,8 @@ class UserController extends Controller
      */
     public function reading()
     {
-//        $session = new Session();
-//        $id = $session->get("id");
-        $id = "2";
+        $session = new Session();
+        $id = $session->get("user_id");
         $log = json_decode(json_encode(DB::table("book_user_log")->where("user_id", $id)->get()), true);
         foreach ($log as $key => $value) {
             $book_id[] = $value['book_id'];
@@ -101,19 +95,6 @@ class UserController extends Controller
 //        print_r($log);die();
         return view("user/reading", array("log" => $log));
     }
-    public function session()
-    {
-//        $id      = "1";
-        $session = new Session();
-        $id = $session->get("id");
-//        $res     = $session->set("id",$id);
-//        var_dump($res);die();
-        //取
-
-//        $value = $request->session()->get("id");
-        print_r($id);
-
-    }
     /*
      * @刘柯
      * 用户申请还书
@@ -125,7 +106,8 @@ class UserController extends Controller
         $book_id            = $this->xss($_POST['id']);
 //        $session            = new Session();
 //       $id = $session->get("id");
-        $user_id            = "2";
+        $session = new Session();
+        $user_id = $session->get("user_id");
         $time               = date("Y-m-d H:i:s");
         $examine['user_id'] = $user_id;
         $examine['book_id'] = $book_id;

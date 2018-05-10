@@ -39,7 +39,6 @@ class LoginController  extends Controller {
         }
         $this->Model->zError($UserArr->user_id);
         $this->Session->set("user_id",$UserArr->user_id);
-
         exit("<script>alert('登录成功');location.href='../user/info'</script>");
     }
     function xss($type)

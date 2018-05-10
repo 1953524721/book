@@ -4,8 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <title>个人信息页</title>
+    <meta name="csrf-token" content="{{csrf_token()}}">
     <link rel="stylesheet" href="{{asset('admins/user_info/common.css')}}">
     <link rel="stylesheet" href="{{asset('admins/user_info/main.css')}}">
+    <style>
+        body{background-color: #F2EBE5}
+        tr,td{height: 50px;}
+        .color{color: red}
+    </style>
 </head>
 <body>
 <center>
