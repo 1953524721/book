@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
-<title>项目管理系统 by www.mycodes.net</title>
+<title>澶�</title>
 <style type="text/css">
 <!--
 body {
@@ -13,19 +13,19 @@ body {
 }
 -->
 </style>
-<link href="../css/css.css" rel="stylesheet" type="text/css" />
+<link href="{{asset('admins/css/css.css')}}" rel="stylesheet" type="text/css" />
 </head>
-
 <body>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
     <td height="59" background="{{asset('admins/images/top.gif')}}"><table width="99%" border="0" cellspacing="0" cellpadding="0">
       <tr>
-        <td width="1%"><a href="http://www.mycodes.net/admin-templates/" target="_blank"><img src="{{asset('admins/images/logo.gif')}}" width="557" height="59" border="0" /></a></td>
-        <td width="64%" align="right" style="font-size:12px;vertical-align:bottom;">&copy; 2009 <a href="http://www.mycodes.net/admin-templates/" style="color:#0099FF;text-decoration:none;">www.mycodes.net</a> QQ:123456 Email:123456@qq.com</td>
+        <td width="1%"><a href="http://www.mycodes.net/admin-templates/" target="_blank"><img src="{{asset('admins/images/logo.jpg')}}" width="557" height="59" border="0" /></a></td>
+        <td width="64%" align="right" style="font-size:12px;vertical-align:bottom;">&copy; 2018 <a href="#" style="color:#0099FF;text-decoration:none;">www.yangg.net</a> QQ:1306811834 Email:1306811834@qq.com</td>
       </tr>
     </table></td>
   </tr>
 </table>
 </body>
+
 </html>

@@ -48,7 +48,7 @@
                             <tr>
                                 <td width="8%"><img name="img8" id="img8" src="{{asset('admins/images/ico04.gif')}}" width="8" height="11" /></td>
                                 <td width="92%">
-                                    <a href="javascript:" target="mainFrame" class="left-font03" onClick="list('8');" >任务管理</a></td>
+                                    <a href="javascript:" target="mainFrame" class="left-font03" onClick="list('8');" >图书管理</a></td>
                             </tr>
                         </table>
                     </td>
@@ -58,11 +58,11 @@
                    cellspacing="0" class="left-table02">
                 <tr>
                     <td width="9%" height="20" ><img id="xiaotu20" src="{{asset('admins/images/ico06.gif')}}" width="8" height="12" /></td>
-                    <td width="91%"><a href="addrenwu.htm" target="mainFrame" class="left-font03" onClick="tupian('20');">创建任务</a></td>
+                    <td width="91%"><a href="{{url('admin/Book/add')}}" target="mainFrame" class="left-font03" onClick="tupian('20');">添加图书</a></td>
                 </tr>
                 <tr>
                     <td width="9%" height="21" ><img id="xiaotu21" src="{{asset('admins/images/ico06.gif')}}" width="8" height="12" /></td>
-                    <td width="91%"><a href="listrenwu.htm" target="mainFrame" class="left-font03" onClick="tupian('21');">任务信息查看</a></td>
+                    <td width="91%"><a href="{{url('admin/Book/show')}}" target="mainFrame" class="left-font03" onClick="tupian('21');">查看图书</a></td>
                 </tr>
             </table>
             <!--  任务系统结束    -->
@@ -77,7 +77,7 @@
                             <tr>
                                 <td width="8%"><img name="img7" id="img7" src="{{asset('admins/images/ico04.gif')}}" width="8" height="11" /></td>
                                 <td width="92%">
-                                    <a href="javascript:" target="mainFrame" class="left-font03" onClick="list('7');" >消息管理</a></td>
+                                    <a href="javascript:" target="mainFrame" class="left-font03" onClick="list('7');" >图书分类</a></td>
                             </tr>
                         </table>
                     </td>
@@ -88,24 +88,12 @@
                 <tr>
                     <td width="9%" height="20" ><img id="xiaotu17" src="{{asset('admins/images/ico06.gif')}}" width="8" height="12" /></td>
                     <td width="91%">
-                        <a href="sendxiaoxi.htm" target="mainFrame" class="left-font03" onClick="tupian('17');">发送信息</a></td>
+                        <a href="sendxiaoxi.htm" target="mainFrame" class="left-font03" onClick="tupian('17');">添加分类</a></td>
                 </tr>
                 <tr>
                     <td width="9%" height="20" ><img id="xiaotu18" src="{{asset('admins/images/ico06.gif')}}" width="8" height="12" /></td>
                     <td width="91%">
-                        <a href="listtakexiaoxi.htm" target="mainFrame" class="left-font03" onClick="tupian('18');">收件信息查看</a></td>
-                </tr>
-                <tr>
-                    <td width="9%" height="20" ><img id="xiaotu19" src="{{asset('admins/images/ico06.gif')}}" width="8" height="12" /></td>
-                    <td width="91%">
-                        <a href="listsendxiaoxi.htm" target="mainFrame" class="left-font03" onClick="tupian('19');">发件信息查看
-                        </a></td>
-                </tr>
-                <tr>
-                    <td width="9%" height="20" ><img id="xiaotu24" src="{{asset('admins/images/ico06.gif')}}" width="8" height="12" /></td>
-                    <td width="91%">
-                        <a href="listxiaoxi.htm" target="mainFrame" class="left-font03" onClick="tupian('24');">消息信息列表
-                        </a></td>
+                        <a href="listtakexiaoxi.htm" target="mainFrame" class="left-font03" onClick="tupian('18');">查看分类</a></td>
                 </tr>
             </table>
             <!--  消息系统结束    -->
@@ -158,28 +146,6 @@
             </table>
             <!--  项目系统结束    -->
 
-            <!--  客户系统开始    -->
-            <table width="100%" border="0" cellpadding="0" cellspacing="0" class="left-table03">
-                <tr>
-                    <td height="29"><table width="85%" border="0" align="center" cellpadding="0" cellspacing="0">
-                            <tr>
-                                <td width="8%" height="12"><img name="img2" id="img2" src="{{asset('admins/images/ico04.gif')}}" width="8" height="11" /></td>
-                                <td width="92%"><a href="javascript:" target="mainFrame" class="left-font03" onClick="list('2');" >客户系统</a></td>
-                            </tr>
-                        </table></td>
-                </tr>
-            </table>
-
-            <table id="subtree2" style="DISPLAY: none" width="80%" border="0" align="center" cellpadding="0" cellspacing="0" class="left-table02">
-
-                <tr>
-                    <td width="9%" height="20" ><img id="xiaotu7" src="{{asset('admins/images/ico06.gif')}}" width="8" height="12" /></td>
-                    <td width="91%"><a href="listkehuxinxi.html" target="mainFrame" class="left-font03" onClick="tupian('7');">客户信息查看</a></td>
-                </tr>
-            </table>
-
-            <!--  客户系统结束    -->
-
             <!--  人员系统开始    -->
             <table width="100%" border="0" cellpadding="0" cellspacing="0" class="left-table03">
                 <tr>
@@ -209,78 +175,6 @@
 
             <!--  人员系统结束    -->
 
-            <!--  考勤系统开始    -->
-            <table width="100%" border="0" cellpadding="0" cellspacing="0" class="left-table03">
-                <tr>
-                    <td height="29"><table width="85%" border="0" align="center" cellpadding="0" cellspacing="0">
-                            <tr>
-                                <td width="8%" height="12"><img name="img4" id="img4" src="{{asset('admins/images/ico04.gif')}}" width="8" height="11" /></td>
-                                <td width="92%"><a href="javascript:" target="mainFrame" class="left-font03" onClick="list('4');" >考勤系统</a></td>
-                            </tr>
-                        </table></td>
-                </tr>
-            </table>
-
-            <table id="subtree4" style="DISPLAY: none" width="80%" border="0" align="center" cellpadding="0" cellspacing="0" class="left-table02">
-                <tr>
-                    <td width="9%" height="20" ><img id="xiaotu11" src="{{asset('admins/images/ico06.gif')}}" width="8" height="12" /></td>
-                    <td width="91%"><a href="listGongZiType.htm" target="mainFrame" class="left-font03" onClick="tupian('11');">考勤类型查看</a></td>
-                </tr>
-                <tr>
-                    <td width="9%" height="20" ><img id="xiaotu12" src="{{asset('admins/images/ico06.gif')}}" width="8" height="12" /></td>
-                    <td width="91%"><a href="listMonthYuanGongGongZi.htm" target="mainFrame" class="left-font03" onClick="tupian('12');">员工考勤信息查看</a></td>
-                </tr>
-            </table>
-
-            <!--  考勤系统结束    -->
-
-            <!-- 管理系统开始 -->
-            <table width="100%" border="0" cellpadding="0" cellspacing="0" class="left-table03">
-                <tr>
-                    <td height="29"><table width="85%" border="0" align="center" cellpadding="0" cellspacing="0">
-                            <tr>
-                                <td width="8%"><img name="img5" id="img5" src="{{asset('admins/images/ico04.gif')}}" width="8" height="11" /></td>
-                                <td width="92%"><a href="javascript:" target="mainFrame" class="left-font03" onClick="list('5');">系统管理</a></td>
-                            </tr>
-                        </table></td>
-                </tr>
-            </table>
-
-            <table id="subtree5" style="DISPLAY: none" width="80%" border="0" align="center" cellpadding="0" cellspacing="0" class="left-table02">
-                <tr>
-                    <td width="9%" height="20"><img id="xiaotu13" src="{{asset('admins/images/ico06.gif')}}" width="8" height="12" /></td>
-                    <td width="91%"><a href="register.html" target="mainFrame" class="left-font03" onClick="tupian('13');">添加用户</a></td>
-                </tr>
-                <tr>
-                    <td height="20"><img id="xiaotu14" src="{{asset('admins/images/ico06.gif')}}" width="8" height="12" /></td>
-                    <td><a href="addquanxian.html" target="mainFrame" class="left-font03" onClick="tupian('14');">添加角色</a></td>
-                </tr>
-            </table>
-            <!-- 管理系统结束-->
-
-
-            <!-- 系统帮助开始 -->
-            <table width="100%" border="0" cellpadding="0" cellspacing="0" class="left-table03">
-                <tr>
-                    <td height="29"><table width="85%" border="0" align="center" cellpadding="0" cellspacing="0">
-                            <tr>
-                                <td width="8%"><img name="img6" id="img6" src="{{asset('admins/images/ico04.gif')}}" width="8" height="11" /></td>
-                                <td width="92%"><a href="mode.html" target="mainFrame" class="left-font03" onClick="list('6');">系统帮助</a></td>
-                            </tr>
-                        </table></td>
-                </tr>
-            </table>
-            <table id="subtree6" style="DISPLAY: none" width="80%" border="0" align="center" cellpadding="0" cellspacing="0" class="left-table02">
-                <tr>
-                    <td width="9%" height="20"><img id="xiaotu15" src="{{asset('admins/images/ico06.gif')}}" width="8" height="12" /></td>
-                    <td width="91%"><a href="mode.html" target="mainFrame" class="left-font03" onClick="tupian('15');">用户手册</a></td>
-                </tr>
-                <tr>
-                    <td height="20"><img id="xiaotu16" src="{{asset('admins/images/ico06.gif')}}" width="8" height="12" /></td>
-                    <td><a href="mode.html" target="mainFrame" class="left-font03" onClick="tupian('16');">规章制度</a></td>
-                </tr>
-            </table>
-            <!-- 系统帮助结束-->
 
             <!--个人信息管理开始-->
 

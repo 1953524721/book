@@ -15,3 +15,9 @@ define('LARAVEL_START', microtime(true));
 */
 
 require __DIR__.'/../vendor/autoload.php';
+
+function getArray($data)
+{
+    $data = json_encode($data);
+    return json_decode($data,true);
+}

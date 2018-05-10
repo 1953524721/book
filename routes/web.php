@@ -14,6 +14,10 @@ Route::group(['prefix' => '/admin','namespace' => 'Admin'],function(){
     Route::get('Index/left','IndexController@left');//后台首页
     Route::get('Index/top','IndexController@top');
     Route::get('Index/main','IndexController@main');
+    Route::match(['post','get'],'Book/add','BookController@add');
+    Route::match(['post','get'],'Book/show','BookController@show');
+    Route::match(['post','get'],'Book/del','BookController@del');
+    Route::match(['post','get'],'Book/update','BookController@update');
 
 });
 Route::get('','IndexController@index');//后台首页

@@ -1,7 +1,6 @@
 <?php
 namespace App\Http\Controllers\Admin;
-use Illuminate\Http\Request;
-use App\Http\Requests;
+
 class IndexController{
     public function index(){
         return view('Admin.Index.index');
