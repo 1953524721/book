@@ -6,16 +6,8 @@
 <meta name="keywords" content="Book Store Template, Free CSS Template, CSS Website Layout, CSS, HTML" />
 <meta name="description" content="Book Store Template, Free CSS Template, Download CSS Website" />
 <link href="{{asset('index/css/templatemo_style.css')}}" rel="stylesheet" type="text/css" />
-<style>
-    .search{
-    width:310px;
-    height:30px;
-    border:1px solid #1B1B1B;
-    float: right;
-    margin-top:98px;
-    /* margin-right:30px; */
-}
-</style>
+
+
 </head>
 <body>
 <div id="templatemo_container">
@@ -45,7 +37,8 @@
         </div>
         <!--此处是搜索框 -->
         <div class="search">
-           <input type="text" name="" style="border-radius: 10px 10px; margin-top:3px;"><button style="border-radius:8px 8px;margin-left:6px; background-color:#CBC750;">Search</button>
+
+            
         </div>
     </div> <!-- end of header -->
 
@@ -56,10 +49,9 @@
                 <h1>图书分类</h1>
                 <ul>
                 <!-- 此处遍历图书分类 -->
-                    <li><a href="subpage.html">Donec accumsan urna</a></li>
-                    <li><a href="subpage.html">Proin vulputate justo</a></li>
-                    <li><a href="#">In sed risus ac feli</a></li>
-
+                    <?php foreach ($data['classify'] as $key=>$val){ ?>
+                    <li><a href="javascript:void(0)"><?= $val['classify_name']?></a></li>
+                    <?php  } ?>
                 </ul>
             </div>
 
@@ -72,59 +64,59 @@
 
         <div id="templatemo_content_right" style="background: url({{asset('index/images/templatemo_h1_bg.jpg')}});">
         <!-- 此处遍历图书封面详情作者以及价格等等 -->
+            <?php foreach ($data['books'] as $key=>$val){ ?>
             <div class="templatemo_product_box">
-                <h1>Photography  <span>(by Best Author)</span></h1>
+                <h1><?= $val['books_name']?>  <span>(<?= $val['books_author']?>)</span></h1>
           <img src="{{asset('index/images/templatemo_image_01.jpg')}}" alt="image" />
                 <div class="product_info">
-                    <p>Etiam luctus. Quisque facilisis suscipit elit. Curabitur...</p>
-                  <h3>$55</h3>
-                    <div class="buy_now_button"><a href="subpage.html">Buy Now</a></div>
-                    <div class="detail_button"><a href="subpage.html">Detail</a></div>
+                    <p><?=$val['books_info']?></p>
+                    <div class="buy_now_button"><a href="subpage.html">现在借阅</a></div>
                 </div>
                 <div class="cleaner">&nbsp;</div>
             </div>
+            <?php } ?>
 
-            <div class="cleaner_with_width">&nbsp;</div>
+            {{--<div class="cleaner_with_width">&nbsp;</div>--}}
 
-            <div class="templatemo_product_box">
-                <h1>Cooking  <span>(by New Author)</span></h1>
-            <img src="{{asset('index/images/templatemo_image_02.jpg')}}" alt="image" />
-                <div class="product_info">
-                    <p>Aliquam a dui, ac magna quis est eleifend dictum.</p>
-                    <h3>$35</h3>
-                    <div class="buy_now_button"><a href="subpage.html">Buy Now</a></div>
-                    <div class="detail_button"><a href="subpage.html">Detail</a></div>
-                </div>
-                <div class="cleaner">&nbsp;</div>
-            </div>
+            {{--<div class="templatemo_product_box">--}}
+                {{--<h1>Cooking  <span>(by New Author)</span></h1>--}}
+            {{--<img src="{{asset('index/images/templatemo_image_02.jpg')}}" alt="image" />--}}
+                {{--<div class="product_info">--}}
+                    {{--<p>Aliquam a dui, ac magna quis est eleifend dictum.</p>--}}
+                    {{--<h3>$35</h3>--}}
+                    {{--<div class="buy_now_button"><a href="subpage.html">Buy Now</a></div>--}}
+                    {{--<div class="detail_button"><a href="subpage.html">Detail</a></div>--}}
+                {{--</div>--}}
+                {{--<div class="cleaner">&nbsp;</div>--}}
+            {{--</div>--}}
 
-            <div class="cleaner_with_height">&nbsp;</div>
+            {{--<div class="cleaner_with_height">&nbsp;</div>--}}
 
-            <div class="templatemo_product_box">
-                <h1>Gardening <span>(by Famous Author)</span></h1>
-          <img src="{{asset('index/images/templatemo_image_01.jpg')}}" alt="image" />
-                <div class="product_info">
-                    <p>Ut fringilla enim sed turpis. Sed justo dolor, convallis at.</p>
-                    <h3>$65</h3>
-                    <div class="buy_now_button"><a href="subpage.html">Buy Now</a></div>
-                    <div class="detail_button"><a href="subpage.html">Detail</a></div>
-                </div>
-                <div class="cleaner">&nbsp;</div>
-            </div>
+            {{--<div class="templatemo_product_box">--}}
+                {{--<h1>Gardening <span>(by Famous Author)</span></h1>--}}
+          {{--<img src="{{asset('index/images/templatemo_image_01.jpg')}}" alt="image" />--}}
+                {{--<div class="product_info">--}}
+                    {{--<p>Ut fringilla enim sed turpis. Sed justo dolor, convallis at.</p>--}}
+                    {{--<h3>$65</h3>--}}
+                    {{--<div class="buy_now_button"><a href="subpage.html">Buy Now</a></div>--}}
+                    {{--<div class="detail_button"><a href="subpage.html">Detail</a></div>--}}
+                {{--</div>--}}
+                {{--<div class="cleaner">&nbsp;</div>--}}
+            {{--</div>--}}
 
-            <div class="cleaner_with_width">&nbsp;</div>
+            {{--<div class="cleaner_with_width">&nbsp;</div>--}}
 
-            <div class="templatemo_product_box">
-                <h1>Sushi Book  <span>(by Japanese Name)</span></h1>
-                <img src="{{asset('index/images/templatemo_image_01.jpg')}}" alt="image" />
-                <div class="product_info">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
-                    <h3>$45</h3>
-                    <div class="buy_now_button"><a href="subpage.html">Buy Now</a></div>
-                    <div class="detail_button"><a href="subpage.html">Detail</a></div>
-                </div>
-                <div class="cleaner">&nbsp;</div>
-            </div>
+            {{--<div class="templatemo_product_box">--}}
+                {{--<h1>Sushi Book  <span>(by Japanese Name)</span></h1>--}}
+                {{--<img src="{{asset('index/images/templatemo_image_01.jpg')}}" alt="image" />--}}
+                {{--<div class="product_info">--}}
+                    {{--<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>--}}
+                    {{--<h3>$45</h3>--}}
+                    {{--<div class="buy_now_button"><a href="subpage.html">Buy Now</a></div>--}}
+                    {{--<div class="detail_button"><a href="subpage.html">Detail</a></div>--}}
+                {{--</div>--}}
+                {{--<div class="cleaner">&nbsp;</div>--}}
+            {{--</div>--}}
 
             <div class="cleaner_with_height">&nbsp;</div>
 
@@ -142,4 +134,7 @@
 
 </div> <!-- end of container -->
 </body>
+<script src="{{asset('js/vue.min.js')}}"></script>
+
+
 </html>

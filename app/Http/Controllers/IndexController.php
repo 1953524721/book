@@ -7,10 +7,19 @@
  */
 namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
+use App\Model\IndexModel;
 use DB;
-class IndexController  extends Controller {
+class IndexController  extends Controller
+{
     //显示页面
-    public function index(){
-        return view("Index");
+    public  $Mode;
+    public function __construct(){
+        $this->Mode = new IndexModel();
     }
+
+    public function index(){
+        $bookArr =  $this->Mode->getBooks();
+        return view("Index",["data"=>$bookArr]);
+    }
+
 }
