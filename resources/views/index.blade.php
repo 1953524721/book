@@ -36,7 +36,7 @@
             <a href="" style="margin-left: 50px;">了解详情...</a>
         </div>
         <!--此处是搜索框 -->
-        <div class="search">
+        <div >
 
             
         </div>
