@@ -34,7 +34,7 @@
                             </tr>
                             <tr>
                                 <td height="22" class="left-font01">
-                                    [&nbsp;<a href="#" target="_top" class="left-font01">退出</a>&nbsp;]</td>
+                                    [&nbsp;<a href="{{ url('admin/Login/loginout')}}" target="_top" class="left-font01">退出</a>&nbsp;]</td>
                             </tr>
                         </table>
                     </td>

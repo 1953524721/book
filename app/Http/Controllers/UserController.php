@@ -33,6 +33,10 @@ class UserController extends Controller
         $session = new Session();
         $id = $session->get("user_id");
         $data = DB::table("book_user_info")->where("user_id", $id)->first();
+        if(empty($data))
+        {
+            return view("user/ins");
+        }
         return view("user/update", array("data" => $data));
     }
     function xss($type)
@@ -67,6 +71,40 @@ class UserController extends Controller
         if ($res)
         {
             return redirect("user/info");
+        }
+        else
+        {
+            return "2";
+        }
+    }
+    /*
+     * @刘柯
+     * 信息添加页
+     * 2018/05/10 17：25
+     */
+    public function insd(Request $request)
+    {
+        $session = new Session();
+        $id = $session->get("user_id");
+        $rest = $request->input();
+        $data['info_birthday']  = $this->xss($rest['birthday']);
+        $data['info_work']      = $this->xss($rest['work']);
+        $data['info_school']    = $this->xss($rest['school']);
+        $data['info_email']     = $this->xss($rest['eamil']);
+        $data['info_iphone']    = $this->xss($rest['iphone']);
+        $data['info_autograph'] = $this->xss($rest['autograph']);
+        $data['info_explain']   = $this->xss($rest['explain']);
+        date_default_timezone_set("PRC");
+        $data['update_time']    = date("Y-m-d H:i:s");
+        $data['user_id']        = $id;
+        $res = DB::table("book_user_info")->insert($data);
+        if ($res)
+        {
+            return redirect("user/info");
+        }
+        else
+        {
+            return "2";
         }
     }
 
@@ -145,22 +183,9 @@ class UserController extends Controller
         }
         $book = json_decode(json_encode(DB::table("book_books")->whereIn("books_id",$book_id)->get()),true);
         $user = json_decode(json_encode(DB::table("book_user")->whereIn("user_id",$user_id)->get()),true);
-//        print_r($data);
-//        print_r($book);
-//        print_r($user);
-        foreach ($data as $key =>$value)
-        {
-            foreach ($book as $ke =>$val)
-            {
-                foreach ($user as $k =>$v)
-                {
-                    $arr['time'][] = $value['time'];
-                    $arr['books_name'][] = $val['books_name'][$key];
-                }
-            }
-        }
-
-        print_r($arr);
+        print_r($data);
+        print_r($book);
+        print_r($user);
 //        return view("user/examine",array("data"=>$data));
     }
 }

@@ -52,21 +52,7 @@ body {
         <td height="35" class="login-text02">密　码：<br /></td>
         <td><input name="admin_psw" type="password" size="33" id="admin_psw" /></td>
       </tr>
-      <tr>
-        <td height="35" class="login-text02">验证图片：<br /></td>
-        <td><div>
-        <img src="{{asset('code/code.php')}}" alt=""
-         onclick="this.src='http://127.0.0.1/book/public/code/code.php?'+new Date().getTime();"
-        title="点击更换验证码">
 
-        <span id="span"></span>
-       </div>
-       </td>
-      </tr>
-        <tr>
-        <td height="35" class="login-text02">验证码：<br /></td>
-        <td><input name="code" type=text size="33"/></td>
-      </tr>
       <tr>
       <tr>
 

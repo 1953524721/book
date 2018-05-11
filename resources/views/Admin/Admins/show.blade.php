@@ -98,22 +98,27 @@ function link(){
                  <tr class="CTitle" >
                         <td height="22" colspan="7" align="center" style="font-size:16px">管理员信息列表</td>
                   </tr>
+
                   <tr bgcolor="#EEEEEE">
 
-                    <td width="10%">ID</td>
-                    <td width="10%">管理员名称</td>
-                    <td width="10%">添加时间</td>
-                    <td width="10%">最后登录时间</td>
-                    <td width="6%">操作</td>
+                    <td width="4%" align="center">ID</td>
+                    <td width="8%" align="center">管理员名称</td>
+                    <td width="9%" align="center">添加时间</td>
+                    <td width="9%" align="center">最后登录时间</td>
+                    <td width="3%" align="center">操作</td>
                   </tr>
+                   <?php foreach ($data as $key => $value) { ?>
+
+
                   <tr bgcolor="#FFFFFF">
 
-                    <td ><a href="listmokuaimingxi.htm" onclick=""></a></td>
-                    <td>2007-11-11</td>
-                    <td>XXXXXX</td>
-                    <td>急</td>
-                    <td><a href="listrenwumingxi.htm">启用</a></td>
+                    <td align="center"><?= $value['admin_id']?></td>
+                    <td align="center"><?= $value['admin_name']?></td>
+                    <td align="center"><?= $value['admin_addtime']?></td>
+                    <td align="center"><?= $value['admin_lastlogintime']?></td>
+                    <td align="center">启用</td>
                   </tr>
+                  <?php   } ?>
             </table></td>
         </tr>
       </table>

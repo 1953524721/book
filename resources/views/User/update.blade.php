@@ -34,30 +34,30 @@
 </tr>
 <tr>
     <th width="300">生日</th>
-    <td><input type="date" name="birthday" value="<?= $data->info_birthday?>"></td>
+    <td><input type="date" name="birthday" value="{{$data->info_birthday}}"></td>
 </tr>
 <tr>
     <th width="300">学校</th>
-    <td><input type="text" class="input-text lh30" name="school" placeholder="学校" value="<?= $data->info_school?>" maxlength="20" minlength="2"></td>
+    <td><input type="text" class="input-text lh30" name="school" placeholder="学校" value="{{ $data->info_school}}" maxlength="20" minlength="2"></td>
 </tr>
 <tr>
     <th width="300">邮箱</th>
-    <td><input type="eamil" id="eamil" class="input-text lh30" placeholder="邮箱" name="eamil" value="<?= $data->info_email?>">
+    <td><input type="eamil" id="eamil" class="input-text lh30" placeholder="邮箱" name="eamil" value="{{ $data->info_email}}">
         <span class="eamil"></span>
     </td>
 </tr>
 <tr>
     <th width="300">手机号</th>
-    <td><input type="tel"  class="input-text lh30" name="iphone" placeholder="邮箱" id="phone" value="<?= $data->info_iphone?>">
+    <td><input type="tel"  class="input-text lh30" name="iphone" placeholder="邮箱" id="phone" value="{{ $data->info_iphone}}">
         <sapn class="phone"></sapn></td>
 </tr>
 <tr>
     <th width="300">个性签名</th>
-    <td><input type="text"  class="input-text lh30" name="autograph" placeholder="个性签名" maxlength="200" minlength="4" value="<?= $data->info_autograph?>"></td>
+    <td><input type="text"  class="input-text lh30" name="autograph" placeholder="个性签名" maxlength="200" minlength="4" value="{{ $data->info_autograph}}"></td>
 </tr>
 <tr>
     <th width="300">个人说明</th>
-    <td><input type="text"  class="input-text lh30" name="explain" placeholder="个人说明" maxlength="200" minlength="4" value="<?= $data->info_explain?>"></td>
+    <td><input type="text"  class="input-text lh30" name="explain" placeholder="个人说明" maxlength="200" minlength="4" value="{{ $data->info_explain}}"></td>
 </tr>
 <tr>
     <td class="td_right"></td>
