@@ -7,8 +7,12 @@ use App\Poll;
 use Symfony\Component\HttpFoundation\Session\Session;
 class UserController extends Controller
 {
+    public  $Session;
+    public function __construct()
+    {
+        $this->Session = new Session();
 
-
+    }
     /*
      * @刘柯
      * 个人信息页面
@@ -16,8 +20,7 @@ class UserController extends Controller
      */
     public function info()
     {
-        $session = new Session();
-        $id = $session->get("user_id");
+        $id = $this->Session->get("user_id");
         $data = DB::table("book_user_info")->where("user_id", $id)->first();
         // print_r($data);die();
         return view("user/info", array("data" => $data));
@@ -30,8 +33,7 @@ class UserController extends Controller
      */
     public function update()
     {
-        $session = new Session();
-        $id = $session->get("user_id");
+        $id = $this->Session->get("user_id");
         $data = DB::table("book_user_info")->where("user_id", $id)->first();
         if(empty($data))
         {
@@ -55,8 +57,7 @@ class UserController extends Controller
      */
     public function up(Request $request)
     {
-        $session = new Session();
-        $id = $session->get("user_id");
+        $id = $this->Session->get("user_id");
         $rest = $request->input();
         $data['info_birthday']  = $this->xss($rest['birthday']);
         $data['info_work']      = $this->xss($rest['work']);
@@ -84,8 +85,7 @@ class UserController extends Controller
      */
     public function insd(Request $request)
     {
-        $session = new Session();
-        $id = $session->get("user_id");
+        $id = $this->Session->get("user_id");
         $rest = $request->input();
         $data['info_birthday']  = $this->xss($rest['birthday']);
         $data['info_work']      = $this->xss($rest['work']);
@@ -114,10 +114,10 @@ class UserController extends Controller
      */
     public function reading()
     {
-        $session = new Session();
-        $id = $session->get("user_id");
-        $log = json_decode(json_encode(DB::table("book_user_log")->where("user_id", $id)->get()), true);
-        foreach ($log as $key => $value) {
+        $id = $this->Session->get("user_id");
+        $log = json_decode(json_encode(DB::table("book_examine")->where("user_id",$id)->get()),true);
+        foreach ($log as $key => $value)
+        {
             $book_id[] = $value['book_id'];
         }
         $book = json_decode(json_encode(DB::table("book_books")->whereIn("books_id", $book_id)->get()), true);
@@ -130,7 +130,6 @@ class UserController extends Controller
             $log[$key]['book_name'] = $value['books_name'];
         }
         $log = json_decode(json_encode($log));
-//        print_r($log);die();
         return view("user/reading", array("log" => $log));
     }
     /*
@@ -140,31 +139,17 @@ class UserController extends Controller
      */
     public function turn()
     {
-        date_default_timezone_set("PRC");
         $book_id            = $this->xss($_POST['id']);
-//        $session            = new Session();
-//       $id = $session->get("id");
-        $session = new Session();
-        $user_id = $session->get("user_id");
-        $time               = date("Y-m-d H:i:s");
-        $examine['user_id'] = $user_id;
-        $examine['book_id'] = $book_id;
-        $examine['time']    = $time;
-        $log['status']      = "2";
-        DB::beginTransaction();
-        try
+        $id = $this->Session->get("user_id");
+        $log['status']      = "3";
+        $res                = DB::table("book_examine")->where("user_id",$user_id)
+                                                       ->update($log);
+        if($res)
         {
-            $res                = DB::table("book_examine")->insert($examine);
-            $log                = DB::table("book_user_log")
-                ->where("book_id",$book_id)
-                ->where("user_id",$user_id)
-                ->update($log);
-            DB::commit();
             return "1";
         }
-        catch (\Exception $exception)
+        else
         {
-            DB::rollback();
             return "2";
         }
     }
@@ -175,37 +160,82 @@ class UserController extends Controller
      */
     public function examine()
     {
-        $data = json_decode(json_encode(DB::table("book_examine")->get()),true);
-        foreach ($data as $key =>$value)
+        $data = DB::select("SELECT
+                             book_user.`user_id`,`user_name`,`books_id`,`books_name`,`status`,`examine_id`
+                          FROM
+                          `book_examine`
+                           INNER JOIN `book_books` ON book_examine.book_id = book_books.books_id
+                          INNER JOIN `book_user`  on book_examine.user_id = book_user.user_id");
+        return view("user/examine",array("data"=>$data));
+    }
+    /*
+     * @刘柯
+     * 密码修改页
+     * 2018/05/11 15:51
+     */
+    public function pwd()
+    {
+        return view("user/pwd");
+    }
+    public function pwdUp()
+    {
+        $id = $this->Session->get("user_id");
+        $data     = $_POST;
+        $old_pwd  = $this->xss($data['old_pwd']);
+        $new_pwd1 = $this->xss($data['new_pwd1']);
+        $new_pwd2 = $this->xss($data['new_pwd2']);
+        if(empty($old_pwd) && empty($new_pwd1) && $new_pwd2)
         {
-            $book_id[] = $value['book_id'];
-            $user_id[] = $value['user_id'];
+            echo "<script>alert('空');window.history.back(-1);</script>";
         }
-        $book = json_decode(json_encode(DB::table("book_books")->whereIn("books_id",$book_id)->get()),true);
-        $user = json_decode(json_encode(DB::table("book_user")->whereIn("user_id",$user_id)->get()),true);
-        print_r($data);
-        print_r($book);
-        print_r($user);
-//        return view("user/examine",array("data"=>$data));
+        elseif($new_pwd1 != $new_pwd2)
+        {
+            echo "<script>alert('不同');window.history.back(-1);</script>";
+        }
+        else
+        {
+            $res =  json_decode(json_encode(DB::table("book_user")->where("user_id",$id)->first()),true);
+            $old_pwd = $this->password($old_pwd);
+            if($res['user_pwd']!= $old_pwd)
+            {
+                echo "<script>alert('不一致');window.history.back(-1);</script>";
+            }
+            else
+            {
+                $new_pwd = $this->password($new_pwd1);
+                $update['user_pwd'] = $new_pwd;
+                $rest   = DB::table("book_user")->where("user_id",$id)->update($update);
+                if($rest)
+                {
+                    return redirect("user/info");
+                }
+            }
+        }
+    }
+   function password($old_pwd)
+    {
+        return  strrev(md5(hash("sha512",$old_pwd)));
+    }
+    /*
+     * @刘柯
+     * 前台用户借书页
+     *
+     */
+    public function borrowBooks()
+    {
+        $book_id = $_POST['book_id'];
+        date_default_timezone_set("PRC");
+        $data['exadd_time'] = date("Y-m-d H:i:s");
+        $data['user_id']    = $this->Session->get("user_id");
+        $data['book_id']    = $book_id;
+        $res                = DB::table("book_examine")->insert($data);
+        if($res)
+        {
+            return "success";
+        }
+        else
+        {
+            return "error";
+        }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

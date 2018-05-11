@@ -106,28 +106,18 @@ Route::post('','IndexController@index');
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Route::group(["prefix"=>'/user',"namespace"=>"User"],function (){
-    Route::get("info","UserController@info");
-    Route::get("update","UserController@update");
-    Route::post("up","UserController@up");
-    Route::get("reading","UserController@reading");
-    Route::get("session","UserController@session");
-});
-
+Route::get("user/info","UserController@info");
+Route::get("user/update","UserController@update");
+Route::post("user/up","UserController@up");
+Route::post("user/insd","UserController@insd");
+Route::get("user/reading","UserController@reading");
+Route::get("user/session","UserController@session");
+Route::post("user/turn","UserController@turn");
+Route::get("user/examine","UserController@examine");
+Route::get("user/pwd","UserController@pwd");
+Route::post("user/exaup","UserController@exaup");
+Route::post("user/pwdUp","UserController@pwdUp");
+Route::get("user/borrowBooks","UserController@borrowBooks");
 
 
 
