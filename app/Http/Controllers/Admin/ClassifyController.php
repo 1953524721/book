@@ -3,7 +3,7 @@
  * @Author: Marte
  * @Date:   2018-05-08 15:48:56
  * @Last Modified by:   Marte
- * @Last Modified time: 2018-05-09 16:19:40
+ * @Last Modified time: 2018-05-10 16:31:57
  */
 namespace App\Http\Controllers\Admin;
 
@@ -11,7 +11,9 @@ use DB;
 use Illuminate\Session;
 use Illuminate\Http\Request;
 use App\Http\Requests;
-class ClassifyController{
+use App\Http\Controllers\Admin\ComController;
+use App\Model\Admin\AdminsModel;
+class ClassifyController extends ComController{
   public function classify(Request $request){
         if($request->isMethod("post")){
             $data = $request->input();

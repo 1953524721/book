@@ -3,16 +3,17 @@
  * @Author: Marte
  * @Date:   2018-05-10 10:04:34
  * @Last Modified by:   Marte
- * @Last Modified time: 2018-05-10 12:11:34
+ * @Last Modified time: 2018-05-10 16:34:11
  */
 namespace App\Http\Controllers\Admin;
 
 use DB;
 use Illuminate\Http\Request;
 use App\Http\Requests;
-use App\Http\Controllers\Admin\CommonController;
-
-class AdminsController {
+use App\Http\Controllers\Admin\ComController;
+use App\Model\Admin\AdminsModel;
+use Illuminate\Session;
+class AdminsController extends ComController{
     public function add(Request $request){
         if($request->isMethod('post')){
             $data = $request->input();
@@ -25,12 +26,14 @@ class AdminsController {
             }
             $salt = $this->get_hash();
             $data['admin_psw'] = md5($salt.$data['admin_psw']);
+            date_default_timezone_set('Asia/Shanghai');
+            $time = date("Y-m-d H:i:s");
             $res = DB::table('book_admin_user')->insert([
                 [
                     'admin_name' => $data['admin_name'],
                     'admin_psw' => $data['admin_psw'],
                     'salt' => $salt,
-                    'admin_addtime' => time(),
+                    'admin_addtime' => $time,
                 ]
             ]);
             if($res){

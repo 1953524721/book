@@ -4,8 +4,9 @@ use DB;
 use Illuminate\Session;
 use Illuminate\Http\Request;
 use App\Http\Requests;
-
-class BookController{
+use App\Http\Controllers\Admin\ComController;
+use App\Model\Admin\AdminsModel;
+class BookController extends ComController{
     public function add(Request $request){
         //取出类型数据
         if($request->isMethod("post")){
