@@ -18,7 +18,7 @@
 <div class="a">
     <div class="a1"><h1>个人信息</h1></div>
     <div class="a2">
-        <div class="a_21"><span style="cursor: pointer;color: red">修改密码</span></div>
+        <div class="a_21"><span style="cursor: pointer;color: red" class="pwd">修改密码</span></div>
         <div class="a_21"><span style="cursor: pointer" class="jie">借书历史</span></div>
         <div class="a_21"><span style="cursor: pointer"></span></div>
     </div>
@@ -81,11 +81,9 @@
 </body>
 <script language="JavaScript" src="{{ URL::asset('/') }}jq.js"></script>
 <script type="text/javascript">
-    $("#gai").on("click",function () {
-        location.href=("update");
-    })
-    $(".jie").on("click",function () {
-        location.href=("reading");
+    $("#gai").on("click",function () { location.href=("update");}); $(".jie").on("click",function () {location.href=("reading");})
+    $(".pwd").on("click",function () {
+        location.href=("pwd");
     })
 </script>
 </html>

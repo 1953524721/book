@@ -23,8 +23,6 @@
 <table width="75%" id="tbStu" border="1" cellpadding="0" cellspacing="0" class="list_table">
     <tr>
         <th>书名</th>
-        <th>借书时间</th>
-        <th>归还时间</th>
         <th>状态</th>
     </tr>
     @foreach ($log as $key =>$row)
@@ -32,11 +30,6 @@
             <td>
                 @if(empty($row->book_name))
                     @else {{$row->book_name}} @endif</td>
-            <td>{{$row->read_time}}</td>
-            <td>
-                @if($row->end_time=="")
-                @else{{$row->end_time}}@endif
-            </td>
             <td>
                @if($row->status == 0)
                     <span class="status" p="{{$row->book_id}}" style="cursor: pointer">申请还书</span>
