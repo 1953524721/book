@@ -20,8 +20,7 @@ class RegisterController  extends Controller {
         $this->Model   = new  RegisterModel();
         $this->Session = new Session();
     }
-    function xss($type)
-    {
+    function xss($type){
         $str = trim($type);              //清理空格
         $str = strip_tags($str);         //过滤html标签
         $str = htmlspecialchars($str);   //将字符内容转化为html实体

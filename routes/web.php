@@ -13,6 +13,11 @@ Route::group(['prefix' => '/admin','namespace' => 'Admin'],function(){
     Route::get('','IndexController@index');//后台首页
     Route::get('Index/left','IndexController@left');//后台首页
 
+
+
+
+
+
     Route::match(['post','get'],'Login/login','LoginController@login');//后台登录
     Route::match(['post','get'],'Login/loginout','LoginController@loginout');//后台登出
     Route::match(['post','get'],'Classify/classify','ClassifyController@classify');//图书分类
@@ -28,9 +33,13 @@ Route::group(['prefix' => '/admin','namespace' => 'Admin'],function(){
     Route::match(['post','get'],'Book/show','BookController@show');
     Route::match(['post','get'],'Book/del','BookController@del');
     Route::match(['post','get'],'Book/update','BookController@update');
-
 });
-Route::get('','IndexController@index');//后台首页
+Route::get('','IndexController@index');
+Route::post('','IndexController@index');
+
+
+
+
 
 
 
@@ -156,6 +165,7 @@ Route::group(["prefix"=>'/Register',"namespace"=>"Register"],function (){
     Route::POST("RegisterDo","RegisterController@RegisterDo");
     Route::POST("OnlyUser","RegisterController@OnlyUser");
 
+//    Route::POST("OnlyUser","RegisterController@OnlyUser");
 });
 Route::group(["prefix"=>'/Login',"namespace"=>"Login"],function (){
     Route::get("index","LoginController@index");

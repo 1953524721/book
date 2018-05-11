@@ -8,6 +8,7 @@
 namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Model\IndexModel;
+use Illuminate\Support\Facades\Input;
 use DB;
 class IndexController  extends Controller
 {
@@ -18,8 +19,37 @@ class IndexController  extends Controller
     }
 
     public function index(){
-        $bookArr =  $this->Mode->getBooks();
+        $str =      $this->xss(Input::get("serch",""));
+        $classify =      $this->xss(Input::get("classify",""));
+        $order =      $this->xss(Input::get("order","desc"));
+        $page    =  $this->xss(Input::get("page",1));
+        $size = 6;
+        $count=getArray(DB::select("SELECT count(*) as num FROM book_books INNER JOIN book_classify ON book_books.classify_id=book_classify.classify_id WHERE book_books.books_status = 1"))[0]['num'];
+        $offset=($page-1)*$size;
+        $last=ceil($count/$size);
+        $up   = $page-1<1?1:$page-1;
+        $next   = $page+1>$last?$last:$page+1;
+
+        $bookArr =  $this->Mode->getBooks($offset,$size,$str,$order);
+
+        $bookArr['p']['first'] =1;
+        $bookArr['p']['last'] =$last;
+        $bookArr['p']['up'] =      $up;
+        $bookArr['p']['next']  =  $next;
+        $bookArr['p']['serch'] = $str;
+        $bookArr['p']['order'] = $order;
         return view("Index",["data"=>$bookArr]);
+    }
+
+
+
+    function xss($type)
+    {
+        $str = trim($type);              //清理空格
+        $str = strip_tags($str);         //过滤html标签
+        $str = htmlspecialchars($str);   //将字符内容转化为html实体
+        $str = addslashes($str);
+        return $str;
     }
 
 }
