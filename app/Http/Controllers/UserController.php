@@ -117,12 +117,11 @@ class UserController extends Controller
     {
         $id = $this->Session->get("user_id");
         $log = json_decode(json_encode(DB::table("book_examine")->where("user_id",$id)->get()),true);
-//        print_r($log);die();
         foreach ($log as $key => $value)
         {
             $book_id[] = $value['book_id'];
         }
-//        print_r($book_id);die();
+
         $book = json_decode(json_encode(DB::table("book_books")->whereIn("books_id", $book_id)->get()), true);
         if(empty($book))
         {
@@ -134,7 +133,7 @@ class UserController extends Controller
             $log[$key]['book_name'] = $value['books_name'];
         }
         $log = json_decode(json_encode($log));
-//        print_r($log);
+
         return view("user/reading", array("log" => $log));
     }
     /*
@@ -145,7 +144,7 @@ class UserController extends Controller
     public function turn()
     {
         $book_id            = $this->xss($_POST['id']);
-        $id = $this->Session->get("user_id");
+        $user_id = $this->Session->get("user_id");
         $log['status']      = "3";
         $res                = DB::table("book_examine")->where("user_id",$user_id)
                                                        ->update($log);
@@ -191,11 +190,11 @@ class UserController extends Controller
         $new_pwd2 = $this->xss($data['new_pwd2']);
         if(empty($old_pwd) && empty($new_pwd1) && $new_pwd2)
         {
-            echo "<script>alert('空');window.history.back(-1);</script>";
+            echo "<script>alert('密码不能空');window.history.back(-1);</script>";
         }
         elseif($new_pwd1 != $new_pwd2)
         {
-            echo "<script>alert('不同');window.history.back(-1);</script>";
+            echo "<script>alert('两次密码不一致');window.history.back(-1);</script>";
         }
         else
         {
@@ -203,7 +202,7 @@ class UserController extends Controller
             $old_pwd = $this->password($old_pwd);
             if($res['user_pwd']!= $old_pwd)
             {
-                echo "<script>alert('不一致');window.history.back(-1);</script>";
+                echo "<script>alert('旧密码错误');window.history.back(-1);</script>";
             }
             else
             {
@@ -228,7 +227,8 @@ class UserController extends Controller
      */
     public function borrowBooks()
     {
-        $book_id = $_GET['books_id'];
+//        $book_id =  $this->xss($_GET['books_id']);
+        $book_id  = "25";
         $user_id  = $this->Session->get("user_id");
         if(empty($user_id))
         {
@@ -241,7 +241,7 @@ class UserController extends Controller
         }
         $examine = DB::table("book_examine")->where("user_id",$user_id)
                                             ->where("book_id",$book_id)
-                                            ->get();
+                                            ->first();
         if(empty($examine))
         {
             $insert['exadd_time'] = date("Y-m-d H:i:s");
