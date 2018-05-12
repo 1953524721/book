@@ -5,12 +5,25 @@ use Illuminate\Session;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Admin\ComController;
+use Illuminate\Support\Facades\Storage;
 use App\Model\Admin\AdminsModel;
 class BookController extends ComController{
     public function add(Request $request){
         //取出类型数据
         if($request->isMethod("post")){
             $data = $request->input();
+            $file = $request->file('pic');
+            $allowed_extensions = ["png", "jpg", "gif"];
+            if ($file->getClientOriginalExtension() && !in_array($file->getClientOriginalExtension(), $allowed_extensions)) {
+                return ['error' => 'You may only upload png, jpg or gif.'];
+            }
+            $destinationPath = 'storage/uploads/'; //public 文件夹下面建 storage/uploads 文件夹
+            $extension = $file->getClientOriginalExtension();
+            $fileName = str_random(10).'.'.$extension;
+            $file->move($destinationPath, $fileName);
+            $filePath = asset($destinationPath.$fileName);
+            $path=$destinationPath.$fileName;
+
             date_default_timezone_set('Asia/Shanghai');
             $time= date("Y-m-d H:i:s",time());
             $res = DB::table('book_books')->insert(
@@ -23,6 +36,7 @@ class BookController extends ComController{
                     'books_status'=>$data['books_status'],
                     'add_time'=>$time,
                     'books_sn'=>date("Ymd").time(),
+                    'books_img'=>$path,
                 ]
             );
             if($res){

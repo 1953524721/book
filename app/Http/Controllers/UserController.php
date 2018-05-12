@@ -121,16 +121,19 @@ class UserController extends Controller
         {
             $book_id[] = $value['book_id'];
         }
+
         $book = json_decode(json_encode(DB::table("book_books")->whereIn("books_id", $book_id)->get()), true);
         if(empty($book))
         {
             return view("user/die");die();
         }
+        print_r($book);die();
         foreach ($book as $key => $value)
         {
             $log[$key]['book_name'] = $value['books_name'];
         }
         $log = json_decode(json_encode($log));
+
         return view("user/reading", array("log" => $log));
     }
     /*
@@ -141,7 +144,7 @@ class UserController extends Controller
     public function turn()
     {
         $book_id            = $this->xss($_POST['id']);
-        $id = $this->Session->get("user_id");
+        $user_id = $this->Session->get("user_id");
         $log['status']      = "3";
         $res                = DB::table("book_examine")->where("user_id",$user_id)
                                                        ->update($log);
@@ -187,11 +190,11 @@ class UserController extends Controller
         $new_pwd2 = $this->xss($data['new_pwd2']);
         if(empty($old_pwd) && empty($new_pwd1) && $new_pwd2)
         {
-            echo "<script>alert('空');window.history.back(-1);</script>";
+            echo "<script>alert('密码不能空');window.history.back(-1);</script>";
         }
         elseif($new_pwd1 != $new_pwd2)
         {
-            echo "<script>alert('不同');window.history.back(-1);</script>";
+            echo "<script>alert('两次密码不一致');window.history.back(-1);</script>";
         }
         else
         {
@@ -199,7 +202,7 @@ class UserController extends Controller
             $old_pwd = $this->password($old_pwd);
             if($res['user_pwd']!= $old_pwd)
             {
-                echo "<script>alert('不一致');window.history.back(-1);</script>";
+                echo "<script>alert('旧密码错误');window.history.back(-1);</script>";
             }
             else
             {
@@ -224,8 +227,8 @@ class UserController extends Controller
      */
     public function borrowBooks()
     {
-        $book_id = $_GET['books_id'];
-        $user_id = $this->Session->get("user_id");
+        $book_id =  $this->xss($_GET['books_id']);
+        $user_id  = $this->Session->get("user_id");
         if(empty($user_id))
         {
             $arr = array(
@@ -237,9 +240,21 @@ class UserController extends Controller
         }
         $examine = DB::table("book_examine")->where("user_id",$user_id)
                                             ->where("book_id",$book_id)
-                                            ->get();
-        if(!empty($examine))
+                                            ->first();
+        if(empty($examine))
         {
+            $examine = DB::table("book_examine")->where("user_id",$user_id)
+                                                ->get();
+            if(count($examine)=="5")
+            {
+                $arr = array(
+                    "e"=>"4",
+                    "m"=>"超过5本限制"
+
+                );
+                return $arr;
+                die();
+            }
             $insert['exadd_time'] = date("Y-m-d H:i:s");
             $insert['book_id']    = $book_id;
             $insert['user_id']    = $user_id;

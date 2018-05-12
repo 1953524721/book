@@ -29,6 +29,7 @@ public function login(Request $request){
             }
             $session = new Session;
             $admin_id = $session->set("admin_id",$admindata['admin_id']);
+            $session->set("admin_name",$admindata['admin_name']);
             // $request->session()->put('admin_id', $admindata['admin_id']);
             // $request->session()->put('admin_name', $admindata['admin_name']);
             // $request->session()->save();

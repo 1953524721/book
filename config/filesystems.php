@@ -64,5 +64,13 @@ return [
         ],
 
     ],
+    'article'=>[
+        'driver'=>'local',
+        'root' =>storage_path('app/Photo/article')
+
+
+    ],
+
+
 
 ];

@@ -3,7 +3,7 @@
  * @Author: Marte
  * @Date:   2018-05-08 15:48:56
  * @Last Modified by:   Marte
- * @Last Modified time: 2018-05-10 16:31:57
+ * @Last Modified time: 2018-05-11 19:15:05
  */
 namespace App\Http\Controllers\Admin;
 
@@ -41,9 +41,9 @@ class ClassifyController extends ComController{
 
      public function show(){
          $classify=getArray(DB::select('SELECT * FROM book_classify'));
-         // print_r($classify);die;
+
          $books = getArray(DB::select('SELECT * FROM book_books'));
-         // print_r($books);die;
+
 
         return view("Admin.Classify.show",array('classify'=>$classify,'books'=>$books));
      }
@@ -58,6 +58,49 @@ class ClassifyController extends ComController{
             echo "<script>alert('删除失败');window.history.back(-1);</script>";die;
         }
         // $classify=getArray(DB::select('SELECT * FROM book_classify'));
+     }
+
+     public function update(){
+
+         $data = $_GET;
+
+         $classify_id=$data['classify_id'];
+         // print_r($classify_id);die;
+         //  $res = DB::table("book_classify")->where('classify_id',$classify_id)->update(
+         //        [
+         //            'classify_name'=>$data['classify_name'],
+
+         //        ]
+         //    );
+
+         return view("Admin.Classify.update",array('data'=>$data));
+     }
+     public function update_type()
+     {
+        // echo 111;die;
+        $data = $_POST;
+        $classify_name = $data['classify_name'];
+        // print_r($classify_name);die;
+          if(!$this->check_one($classify_name)){
+                echo "<script>alert('分类名称已存在');window.history.back(-1);</script>";die;
+            }
+          $res = DB::table("book_classify")->where('classify_id',$data['classify_id'])->update(
+                [
+                    'classify_name'=>$data['classify_name'],
+
+                ]
+            );
+
+
+        if($res)
+        {
+            echo "<script>alert('修改成功');location.href='show';</script>";die;
+        }
+        else
+        {
+            echo "<script>alert('修改失败');window.history.back(-1);</script>";die;
+        }
+
      }
 
      public function check_one($admin_name,$id = 0){
