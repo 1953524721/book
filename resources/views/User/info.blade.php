@@ -11,7 +11,7 @@
         body{background-color: #F2EBE5}
         tr,td{height: 50px;}
         .color{color: red}
-        .a_21{float: left;width: 50px;height: 50px;background-color: red}
+        .a_21{float: right;width: 50px;height: 50px;background-color: red}
     </style>
 </head>
 <body>
@@ -19,9 +19,18 @@
 <div class="a">
     <div class="a1"><h1>个人信息</h1></div>
     <div class="a2">
+		<table>
+			<tr>
+				<td></td>
+			</tr>
+			
+			
+		</table>
+<!--
         <div class="a_21"><span style="cursor: pointer;color: red" class="pwd">修改密码</span></div>
         <div class="a_21"><span style="cursor: pointer" class="jie">借书历史</span></div>
         <div class="a_21"><span style="cursor: pointer"></span></div>
+-->
     </div>
 </div>
 <div id="table" class="mt10">
