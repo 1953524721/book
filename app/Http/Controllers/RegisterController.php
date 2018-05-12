@@ -78,6 +78,7 @@ class RegisterController  extends Controller {
         foreach ($allArr as $key =>$val){
             $post[$key] = $this->xss($val);
         }
+//        print_r($post);die;
         //读取发送验证码！
         $getCode =  $this->Model->getCode($post['pNum']);
         if(empty($getCode)){
@@ -91,6 +92,7 @@ class RegisterController  extends Controller {
         //添加入库
         $insert = array(
             "user_name"=>$post['user_name'],
+            "user_phone"=>$post['pNum'],
             "user_pwd"=>strrev(md5(hash("sha512",$post['user_pwd'])))
         );
         //入库
