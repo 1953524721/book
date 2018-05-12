@@ -1,6 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+<meta name="csrf-token" content="{{csrf_token()}}">
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
 <title>项目管理系统 by www.mycodes.net</title>
 <style type="text/css">
@@ -116,7 +117,11 @@ function link(){
                     <td align="center"><?= $value['admin_name']?></td>
                     <td align="center"><?= $value['admin_addtime']?></td>
                     <td align="center"><?= $value['admin_lastlogintime']?></td>
-                    <td align="center">启用</td>
+                    <?php if($value['status']==0){ ?>
+                    <td align="center"><font color="green" style="cursor: pointer" class="status"  p = "<?=$value['admin_id']?>" statu="0">启用</font></td>
+                    <?php }else{ ?>
+                    <td align="center"><font color="red" style="cursor: pointer" class="status"  p = "<?=$value['admin_id']?>" statu="1">未启用</font></td>
+                    <?php } ?>
                   </tr>
                   <?php   } ?>
             </table></td>
@@ -136,4 +141,41 @@ function link(){
 </table>
 </form>
 </body>
+<script src="{{asset('admins/js/jquery-1.8.3.min.js')}}" type="text/javascript"></script>
+<script>
+ $(document).on("click",".status",function(){
+        var  id   = $(this).attr("p");
+        var  display  = $(this).attr("statu");
+        var _this = $(this);
+        // alert(display);
+        var _this = $(this);
+        $.ajax({
+            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+          type:"POST",
+          url:"{{url('admin/Admins/up')}}",
+          data:{id:id,display:display},
+          success:function(res){
+             if(res==1)
+                {
+                    if(display==0)
+                    {
+                        _this.attr("statu","1");
+                        _this.attr("color","red");
+                        _this.html("未启用");
+                    }
+                    else
+                    {
+                        _this.attr("statu","0");
+                        _this.attr("color","green");
+                        _this.html("启用");
+                    }
+                }
+                else
+                {
+                    alert(res)
+                }
+          }
+        })
+ })
+</script>
 </html>
