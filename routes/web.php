@@ -159,7 +159,7 @@ Route::get("user/borrowBooks","UserController@borrowBooks");
 
 
     Route::get("Login/index","LoginController@index");
-
+    Route::post("Login/Login","LoginController@Login");
 
 
 

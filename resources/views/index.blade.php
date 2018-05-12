@@ -27,6 +27,7 @@
         <ul>
             <li><a href="" class="current">欢迎进入图书管理主页面</a></li>
             <li><a href="{{('Login/index')}}">现在去登录</a></li>
+            <li><a href="{{('Register/index')}}">现在去注册</a></li>
         </ul>
     </div>
     <div id="templatemo_header" style="background: url({{asset('index/images/templatemo_header_bg.jpg')}});">
@@ -93,9 +94,10 @@
           <img src="<?php echo $val['books_img'] ?>" alt="image" height="150px;" />
                 <div class="product_info">
                     <p><?=$val['books_info']?></p>
-                    <div class="buy_now_button"><a href="Javascript:void(0)">现在借阅</a></div>
+                    <p>剩余：<?= $val['books_num']?>本</p>
+                    <div class="buy_now_button"><a href="Javascript:void(0)" where="<?= $val['books_id']?>" id="jy">现在借阅</a></div>
                 </div>
-                <div class="cleaner">1234564596</div>
+                <div class="cleaner"></div>
             </div>
             <?php } ?>
             <div class="cleaner_with_height">&nbsp;</div>
@@ -122,13 +124,11 @@
 </body>
 
 <script language="JavaScript" src="{{ URL::asset('/') }}jq.js"></script>
-{{--<script>--}}
-    {{--$.ajaxSetup({--}}
-        {{--headers: {--}}
-            {{--'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')--}}
-        {{--}--}}
-    {{--});--}}
-{{--</script>--}}
+<script>
+    $(document).on("click","#jy",function () {
+        alert($)
+    })
+</script>
 
 
 </html>

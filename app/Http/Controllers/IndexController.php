@@ -17,7 +17,6 @@ class IndexController  extends Controller
     public function __construct(){
         $this->Mode = new IndexModel();
     }
-
     public function index(){
         $str =      $this->xss(Input::get("serch",""));
         $classify =      $this->xss(Input::get("classify",""));
@@ -38,8 +37,6 @@ class IndexController  extends Controller
         $bookArr['p']['order'] = $order;
         return view("Index",["data"=>$bookArr]);
     }
-
-
 
     function xss($type)
     {
