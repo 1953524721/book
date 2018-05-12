@@ -4,6 +4,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use DB;
 use App\Poll;
+use Mockery\Exception;
 use Symfony\Component\HttpFoundation\Session\Session;
 class UserController extends Controller
 {
@@ -223,19 +224,52 @@ class UserController extends Controller
      */
     public function borrowBooks()
     {
-        $book_id = $_POST['book_id'];
-        date_default_timezone_set("PRC");
-        $data['exadd_time'] = date("Y-m-d H:i:s");
-        $data['user_id']    = $this->Session->get("user_id");
-        $data['book_id']    = $book_id;
-        $res                = DB::table("book_examine")->insert($data);
-        if($res)
+        $book_id = $_GET['books_id'];
+        $user_id = $this->Session->get("user_id");
+        if(empty($user_id))
         {
-            return "success";
+            $arr = array(
+                "e" => "3",
+                "m"=>"未登录"
+            );
+            return $arr;
+            die();
+        }
+        $examine = DB::table("book_examine")->where("user_id",$user_id)
+                                            ->where("book_id",$book_id)
+                                            ->get();
+        if(!empty($examine))
+        {
+            $insert['exadd_time'] = date("Y-m-d H:i:s");
+            $insert['book_id']    = $book_id;
+            $insert['user_id']    = $user_id;
+            $res =  DB::table("book_examine")->insert($insert);
+            if($res)
+            {
+                $arr = array(
+                    "e"=>"0",
+                    "m"=>"借书成功"
+                );
+                $arr = json_encode($arr);
+                return $arr;
+            }
+            else
+            {
+                $arr = array(
+                    "e"=>"1",
+                    "m"=>"借书失败"
+                );
+                $arr = json_encode($arr);
+                return $arr;
+            }
         }
         else
         {
-            return "error";
+            $arr = array(
+                "e"=>"2",
+                "m"=>"已经借走了"
+            );
+            return $arr;
         }
     }
 }

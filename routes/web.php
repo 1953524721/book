@@ -117,7 +117,7 @@ Route::get("user/examine","UserController@examine");
 Route::get("user/pwd","UserController@pwd");
 Route::post("user/exaup","UserController@exaup");
 Route::post("user/pwdUp","UserController@pwdUp");
-Route::get("user/borrowBooks","UserController@borrowBooks");
+Route::any("user/borrowBooks","UserController@borrowBooks");
 
 
 
