@@ -117,20 +117,24 @@ class UserController extends Controller
     {
         $id = $this->Session->get("user_id");
         $log = json_decode(json_encode(DB::table("book_examine")->where("user_id",$id)->get()),true);
+//        print_r($log);die();
         foreach ($log as $key => $value)
         {
             $book_id[] = $value['book_id'];
         }
+//        print_r($book_id);die();
         $book = json_decode(json_encode(DB::table("book_books")->whereIn("books_id", $book_id)->get()), true);
         if(empty($book))
         {
             return view("user/die");die();
         }
+        print_r($book);die();
         foreach ($book as $key => $value)
         {
             $log[$key]['book_name'] = $value['books_name'];
         }
         $log = json_decode(json_encode($log));
+//        print_r($log);
         return view("user/reading", array("log" => $log));
     }
     /*
@@ -225,7 +229,7 @@ class UserController extends Controller
     public function borrowBooks()
     {
         $book_id = $_GET['books_id'];
-        $user_id = $this->Session->get("user_id");
+        $user_id  = $this->Session->get("user_id");
         if(empty($user_id))
         {
             $arr = array(
@@ -238,7 +242,7 @@ class UserController extends Controller
         $examine = DB::table("book_examine")->where("user_id",$user_id)
                                             ->where("book_id",$book_id)
                                             ->get();
-        if(!empty($examine))
+        if(empty($examine))
         {
             $insert['exadd_time'] = date("Y-m-d H:i:s");
             $insert['book_id']    = $book_id;
