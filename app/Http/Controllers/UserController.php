@@ -227,8 +227,7 @@ class UserController extends Controller
      */
     public function borrowBooks()
     {
-//        $book_id =  $this->xss($_GET['books_id']);
-        $book_id  = "25";
+        $book_id =  $this->xss($_GET['books_id']);
         $user_id  = $this->Session->get("user_id");
         if(empty($user_id))
         {
@@ -244,6 +243,18 @@ class UserController extends Controller
                                             ->first();
         if(empty($examine))
         {
+            $examine = DB::table("book_examine")->where("user_id",$user_id)
+                                                ->get();
+            if(count($examine)=="5")
+            {
+                $arr = array(
+                    "e"=>"4",
+                    "m"=>"超过5本限制"
+
+                );
+                return $arr;
+                die();
+            }
             $insert['exadd_time'] = date("Y-m-d H:i:s");
             $insert['book_id']    = $book_id;
             $insert['user_id']    = $user_id;
