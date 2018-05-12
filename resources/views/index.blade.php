@@ -125,10 +125,36 @@
 
 <script language="JavaScript" src="{{ URL::asset('/') }}jq.js"></script>
 <script>
-    $(document).on("click","#jy",function () {
-        alert($)
-    })
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
 </script>
+<script>
+    $(document).on("click","#jy",function () {
+        var books_id = $(this).attr("where");
+        $.ajax({
+            type: "get",
+            url: "{{('user/borrowBooks')}}",
+            data: {books_id:books_id},
+            dataType:"json",
+            success: function(msg){
+                if(msg.e==0){
+                    alert(msg.m)
+                }
+                if(msg.e==3){
+                    alert(msg.m)
+                    location.href="{{('Login/index')}}"
+                }else{
+                    alert(msg.m)
+                }
+
+            }
+        })
 
 
+    })
+
+</script>
 </html>
