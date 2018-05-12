@@ -12,21 +12,19 @@
 Route::group(['prefix' => '/admin','namespace' => 'Admin'],function(){
     Route::get('','IndexController@index');//后台首页
     Route::get('Index/left','IndexController@left');//后台首页
-
-
-
-
-
-
     Route::match(['post','get'],'Login/login','LoginController@login');//后台登录
     Route::match(['post','get'],'Login/loginout','LoginController@loginout');//后台登出
     Route::match(['post','get'],'Classify/classify','ClassifyController@classify');//图书分类
     Route::match(['post','get'],'Classify/show','ClassifyController@show');//图书分类展示
     Route::get('Classify/delete/{id}','ClassifyController@delete');//图书分类删除
-
+    Route::match(['post','get'],'Classify/update','ClassifyController@update');//图书分类修改
+    Route::match(['post','get'],'Classify/update_type','ClassifyController@update_type');//图书分类修改
 
     Route::match(['post','get'],'Admins/add','AdminsController@add');//后台管理员添加
     Route::match(['post','get'],'Admins/show','AdminsController@show');//后台管理员展示
+   Route::match(['post','get'],'Admins/up','AdminsController@up');//后台管理员展示（ajax）
+    Route::match(['post','get'],'Users/show','UsersController@show');//前台管理员展示
+    Route::match(['post','get'],'Users/up','UsersController@up');//前台管理员展示（ajax）
     Route::get('Index/top','IndexController@top');
     Route::get('Index/main','IndexController@main');
     Route::match(['post','get'],'Book/add','BookController@add');

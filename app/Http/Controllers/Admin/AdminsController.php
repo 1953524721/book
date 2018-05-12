@@ -3,7 +3,7 @@
  * @Author: Marte
  * @Date:   2018-05-10 10:04:34
  * @Last Modified by:   Marte
- * @Last Modified time: 2018-05-10 16:34:11
+ * @Last Modified time: 2018-05-11 15:13:06
  */
 namespace App\Http\Controllers\Admin;
 
@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Admin\ComController;
 use App\Model\Admin\AdminsModel;
-use Illuminate\Session;
+
 class AdminsController extends ComController{
     public function add(Request $request){
         if($request->isMethod('post')){
@@ -53,6 +53,26 @@ class AdminsController extends ComController{
         // print_r($data);die;
         return view('Admin.Admins.show',array('data'=> $data));
     }
+
+     public function up()
+            {
+                $data        = $_POST;
+                // print_r($data);die;
+                $display     = $data['display'];
+                $id          = $data['id'];
+                $res = DB::update("UPDATE `book`.`book_admin_user` SET `status` = '$display' WHERE `admin_id` = '$id'");
+                // var_dump($res);die;
+                if($res)
+                {
+                    echo "1";
+                }
+                else
+                {
+                    // $sql = Db::table("book_admin_user")->getLastSql();
+                    // echo $sql;
+                    echo "2";
+                }
+            }
     public function check_one($admin_name,$id = 0){
         $count = DB::table("book_admin_user")->where('admin_name',$admin_name)->where("admin_id",'!=',$id)->count();
         if($count >= 1){

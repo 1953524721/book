@@ -1,6 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+<meta name="csrf-token" content="{{csrf_token()}}">
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
 <title>项目管理系统 by www.mycodes.net</title>
 <style type="text/css">
@@ -80,50 +81,47 @@ function link(){
 
   <tr>
     <td height="30">      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td height="62" background="../images/nav04.gif">
 
+           <table width="98%" border="0" align="center" cellpadding="0" cellspacing="0">
+
+          </table></td>
+        </tr>
     </table></td></tr>
   <tr>
     <td><table id="subtree1" style="DISPLAY: " width="100%" border="0" cellspacing="0" cellpadding="0">
         <tr>
           <td><table width="95%" border="0" align="center" cellpadding="0" cellspacing="0">
-          {{ csrf_field() }}
-
               <tr>
                 <td height="40" class="font42">
                 <table width="100%" border="0" cellpadding="4" cellspacing="1" bgcolor="#464646" class="newfont03">
                  <tr class="CTitle" >
-                        <td height="22" colspan="7" align="center" style="font-size:16px">图书分类展示</td>
+                        <td height="22" colspan="7" align="center" style="font-size:16px">用户信息列表</td>
                   </tr>
+
                   <tr bgcolor="#EEEEEE">
 
-                    <td width="10%">所属分类</td>
-                    <td width="10%">图书名称</td>
-                    <td width="12%">操作</td>
+                    <td width="4%" align="center">ID</td>
+                    <td width="8%" align="center">用户名</td>
+                    <td width="9%" align="center">用户手机号</td>
+                    <td width="3%" align="center">账号状态</td>
                   </tr>
-                  <?php foreach ($classify as $key => $v) { ?>
+                   <?php foreach ($data as $key => $value) { ?>
+
+
                   <tr bgcolor="#FFFFFF">
 
-                    <td ><?= $v['classify_name']?></td>
-
-                    <td>
-                    <select name="" class="type" p="" where="">
-                    <?php foreach ($books as $ke => $val){ ?>
-                      <?php if($v['classify_id']==$val['classify_id']){ ?>
-                      {
-                        <option value="<?= $val['books_id']?>"><?= $val['books_name']?></option>
-                      }
-                      <?php }?>
-                      }
+                    <td align="center"><?= $value['user_id']?></td>
+                    <td align="center"><?= $value['user_name']?></td>
+                    <td align="center"><?= $value['user_phone']?></td>
+                    <?php if($value['user_status']==0){ ?>
+                    <td align="center"><font color="green" style="cursor: pointer" class="status"  p = "<?=$value['user_id']?>" status="3">正常</font></td>
+                    <?php }else{ ?>
+                    <td align="center"><font color="red" style="cursor: pointer" class="status"  p = "<?=$value['user_id']?>" status="0">冻结</font></td>
                     <?php } ?>
-                    </select>
-                  </td>
-
-                    <td><a href="{{url('admin/Classify/update')}}?classify_id=<?= $v['classify_id']?>&classify_name=<?= $v['classify_name']?>">编辑|</a>
-                      <a class="red" href="javascript:;" onclick='javascript:if(confirm("删除分类是会将分类下的图书一并删除，您确定要删除吗?")){location.href="delete/{{$v['classify_id']}}"}' >删除
-        </a></td>
-
                   </tr>
-                   <?php }?>
+                  <?php   } ?>
             </table></td>
         </tr>
       </table>
@@ -141,5 +139,40 @@ function link(){
 </table>
 </form>
 </body>
-<script src="{{asset('admins/js/jquery-3.0.0.min.js')}}" type="text/javascript" charset="utf-8" async defer></script>
+<script src="{{asset('admins/js/jquery-1.8.3.min.js')}}" type="text/javascript"></script>
+<script>
+ $(document).on("click",".status",function(){
+        var  id   = $(this).attr("p");
+        var  display  = $(this).attr("status");
+        var _this = $(this);
+
+        $.ajax({
+            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+          type:"POST",
+          url:"{{url('admin/Users/up')}}",
+          data:{id:id,display:display},
+          success:function(res){
+             if(res==1)
+                {
+                    if(display==3)
+                    {
+                        _this.attr("status","0");
+                        _this.attr("color","red");
+                        _this.html("冻结");
+                    }
+                    else
+                    {
+                        _this.attr("status","3");
+                        _this.attr("color","green");
+                        _this.html("正常");
+                    }
+                }
+                else
+                {
+                    alert(res)
+                }
+          }
+        })
+ })
+</script>
 </html>
