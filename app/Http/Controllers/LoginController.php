@@ -26,11 +26,11 @@ class LoginController  extends Controller {
         $user_name =  $this->xss(Input::get("user_name"));
         $user_pwd  =  $this->xss(Input::get("user_pwd"));
         $UserArr   =  $this->Model->getUser($user_name);
-        if($UserArr->user_status>=3){
-            exit("<script>alert('该账号已被冻结。。。');location.href='index'</script>");
-        }
         if(empty($UserArr)){
             exit("<script>alert('用户名错误');location.href='index'</script>");
+        }
+        if($UserArr->user_status>=3){
+            exit("<script>alert('该账号已被冻结。。。');location.href='index'</script>");
         }
         if($UserArr->user_pwd!=strrev(md5(hash("sha512",$user_pwd)))){
             $this->Model->upError($UserArr->user_id);
