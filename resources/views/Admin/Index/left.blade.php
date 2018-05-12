@@ -30,7 +30,7 @@
                         <table width="90%" border="0" align="center" cellpadding="0" cellspacing="0">
                             <tr>
                                 <td width="25%" rowspan="2"><img src="{{asset('admins/images/ico02.gif')}}" width="35" height="35" /></td>
-                                <td width="75%" height="22" class="left-font01">您好，<span class="left-font02">king</span></td>
+                                <td width="75%" height="22" class="left-font01">您好，<span class="left-font02"><?= $admin_name?></span></td>
                             </tr>
                             <tr>
                                 <td height="22" class="left-font01">
@@ -97,7 +97,34 @@
                 </tr>
             </table>
             <!--  消息系统结束    -->
+            <!--  审核开始    -->
+            <TABLE width="100%" border="0" cellpadding="0" cellspacing="0" class="left-table03">
+                <tr>
+                    <td height="29">
+                        <table width="85%" border="0" align="center" cellpadding="0" cellspacing="0">
+                            <tr>
+                                <td width="8%"><img name="img9" id="img9" src="{{asset('admins/images/ico04.gif')}}" width="8" height="11" /></td>
+                                <td width="92%">
+                                    <a href="javascript:" target="mainFrame" class="left-font03" onClick="list('9');" >借书审核</a></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </TABLE>
 
+            <table id="subtree9" style="DISPLAY: none" width="80%" border="0" align="center" cellpadding="0"
+                   cellspacing="0" class="left-table02">
+                <tr>
+                    <td width="9%" height="22" ><img id="xiaotu22" src="{{asset('admins/images/ico06.gif')}}" width="8" height="12" /></td>
+                    <td width="91%"><a href="{{url('admin/Do/show')}}" target="mainFrame" class="left-font03"
+                                       onClick="tupian('22');">借书列表</a></td>
+                </tr>
+                <tr>
+                    <td width="9%" height="23" ><img id="xiaotu23" src="{{asset('admins/images/ico06.gif')}}" width="8" height="12" /></td>
+                    <td width="91%"><a href="{{url('admin/Do/auditing')}}" target="mainFrame" class="left-font03"
+                                       onClick="tupian('23');">还书列表</a></td>
+                </tr>
+            </table>
 
 
             <TABLE width="100%" border="0" cellpadding="0" cellspacing="0" class="left-table03">

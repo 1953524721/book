@@ -35,6 +35,11 @@
                                                 <span class="red"> *</span></td>
                                         </tr>
                                         <tr>
+                                            <td nowrap align="right" width="13%">图书图片:</td>
+                                            <td width="41%"><input name="pic" id="book_name" class="text" style="width:250px" type="file" size="40" />
+                                                <span class="red"> *</span></td>
+                                        </tr>
+                                        <tr>
                                             <td nowrap align="right">图书作者:</td>
                                             <td><input name="books_author" id="books_author" class="text" style="width:154px" /></td>
                                         </tr>
