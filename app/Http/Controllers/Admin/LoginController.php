@@ -3,7 +3,7 @@
  * @Author: Marte
  * @Date:   2018-05-08 10:48:58
  * @Last Modified by:   Marte
- * @Last Modified time: 2018-05-11 15:40:41
+ * @Last Modified time: 2018-05-10 17:12:06
  */
 namespace App\Http\Controllers\Admin;
 
@@ -19,7 +19,6 @@ public function login(Request $request){
         if($request->isMethod("post")){
             $data = $request->input();
             // print_r($data);die;
-            // $status=getArray(DB::select('SELECT * FROM book_admin_user'));
             $admindata = getArray(DB::table('book_admin_user')->where(['admin_name'=>$data['admin_name']])->first());
             if(!$admindata){
                 echo "<script>alert('用户名或者密码错误,请重新输入！');window.history.back(-1);</script>";die;
@@ -28,12 +27,9 @@ public function login(Request $request){
             if($password != $admindata['admin_psw']){
                 echo "<script>alert('用户名或者密码错误！');window.history.back(-1);</script>";die;
             }
-
-            if ($admindata['status']==0) {
-                echo "<script>alert('此用户已经被锁定 请联系管理员');window.history.back(-1);</script>";die;
-            }
             $session = new Session;
             $admin_id = $session->set("admin_id",$admindata['admin_id']);
+            $session->set("admin_name",$admindata['admin_name']);
             // $request->session()->put('admin_id', $admindata['admin_id']);
             // $request->session()->put('admin_name', $admindata['admin_name']);
             // $request->session()->save();

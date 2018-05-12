@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,7 +22,7 @@ Route::group(['prefix' => '/admin','namespace' => 'Admin'],function(){
 
     Route::match(['post','get'],'Admins/add','AdminsController@add');//后台管理员添加
     Route::match(['post','get'],'Admins/show','AdminsController@show');//后台管理员展示
-   Route::match(['post','get'],'Admins/up','AdminsController@up');//后台管理员展示（ajax）
+    Route::match(['post','get'],'Admins/up','AdminsController@up');//后台管理员展示（ajax）
     Route::match(['post','get'],'Users/show','UsersController@show');//前台管理员展示
     Route::match(['post','get'],'Users/up','UsersController@up');//前台管理员展示（ajax）
     Route::get('Index/top','IndexController@top');
@@ -31,6 +31,8 @@ Route::group(['prefix' => '/admin','namespace' => 'Admin'],function(){
     Route::match(['post','get'],'Book/show','BookController@show');
     Route::match(['post','get'],'Book/del','BookController@del');
     Route::match(['post','get'],'Book/update','BookController@update');
+    Route::get('Do/show','DoController@show');
+    Route::match(['post','get'],'Do/auditing','DoController@auditing');
 });
 Route::get('','IndexController@index');
 Route::post('','IndexController@index');
