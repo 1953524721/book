@@ -29,10 +29,13 @@ $user = new Session();
 <div id="templatemo_container">
     <div id="templatemo_menu">
         <ul>
-            <li><a href="" class="current">欢迎<?php echo $user->get("user_name")  ?></a></li>
+            <?php if(empty($user->get("user_name"))){ ?>
             <li><a href="{{('Login/index')}}">现在去登录</a></li>
             <li><a href="{{('Register/index')}}">现在去注册</a></li>
+            <?php }else{ ?>
+            <li><a href="" class="current">欢迎<font color="red"><?php echo $user->get("user_name")  ?></font></a></li>
             <li><a href="{{('user/info')}}">个人中心</a></li>
+            <?php } ?>
         </ul>
     </div>
     <div id="templatemo_header" style="background: url({{asset('index/images/templatemo_header_bg.jpg')}});">
