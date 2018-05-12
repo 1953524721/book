@@ -1,3 +1,7 @@
+<?php
+use Symfony\Component\HttpFoundation\Session\Session;
+$user = new Session();
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -25,7 +29,7 @@
 <div id="templatemo_container">
     <div id="templatemo_menu">
         <ul>
-            <li><a href="" class="current">欢迎进入图书管理主页面</a></li>
+            <li><a href="" class="current">欢迎<?php echo $user->get("user_name")  ?></a></li>
             <li><a href="{{('Login/index')}}">现在去登录</a></li>
             <li><a href="{{('Register/index')}}">现在去注册</a></li>
             <li><a href="{{('user/info')}}">个人中心</a></li>
@@ -141,6 +145,7 @@
             data: {books_id:books_id},
             dataType:"json",
             success: function(msg){
+                // console.log(msg);
                 if(msg.e==0){
                     alert(msg.m)
                 }
