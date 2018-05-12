@@ -11,6 +11,7 @@
         body{background-color: #F2EBE5}
         tr,td{height: 50px;}
         .color{color: red}
+        .a_21{float: left;width: 50px;height: 50px;background-color: red}
     </style>
 </head>
 <body>
