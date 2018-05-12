@@ -26,6 +26,7 @@
     <div id="templatemo_menu">
         <ul>
             <li><a href="" class="current">欢迎进入图书管理主页面</a></li>
+            <li><a href="{{('Login/index')}}">现在去登录</a></li>
         </ul>
     </div>
     <div id="templatemo_header" style="background: url({{asset('index/images/templatemo_header_bg.jpg')}});">
@@ -94,7 +95,7 @@
                     <p><?=$val['books_info']?></p>
                     <div class="buy_now_button"><a href="Javascript:void(0)">现在借阅</a></div>
                 </div>
-                <div class="cleaner">&nbsp;</div>
+                <div class="cleaner">1234564596</div>
             </div>
             <?php } ?>
             <div class="cleaner_with_height">&nbsp;</div>

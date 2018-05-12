@@ -29,9 +29,7 @@ class IndexController  extends Controller
         $last=ceil($count/$size);
         $up   = $page-1<1?1:$page-1;
         $next   = $page+1>$last?$last:$page+1;
-
         $bookArr =  $this->Mode->getBooks($offset,$size,$str,$order);
-
         $bookArr['p']['first'] =1;
         $bookArr['p']['last'] =$last;
         $bookArr['p']['up'] =      $up;
