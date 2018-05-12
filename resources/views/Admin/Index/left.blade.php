@@ -168,16 +168,9 @@
             <table id="subtree3" style="DISPLAY: none" width="80%" border="0" align="center" cellpadding="0" cellspacing="0" class="left-table02">
                 <tr>
                     <td width="9%" height="20" ><img id="xiaotu8" src="{{asset('admins/images/ico06.gif')}}" width="8" height="12" /></td>
-                    <td width="91%"><a href="listyuangong.html" target="mainFrame" class="left-font03" onClick="tupian('8');">人员信息查看</a></td>
+                    <td width="91%"><a href="{{url('admin/Users/show')}}" target="mainFrame" class="left-font03" onClick="tupian('8');">用户查看</a></td>
                 </tr>
-                <tr>
-                    <td width="9%" height="20" ><img id="xiaotu9" src="{{asset('admins/images/ico06.gif')}}" width="8" height="12" /></td>
-                    <td width="91%"><a href="listzhiwu.htm" target="mainFrame" class="left-font03" onClick="tupian('9');">职务信息查看</a></td>
-                </tr>
-                <tr>
-                    <td width="9%" height="20" ><img id="xiaotu10" src="{{asset('admins/images/ico06.gif')}}" width="8" height="12" /></td>
-                    <td width="91%"><a href="listMonthYuanGongGongZi.htm" target="mainFrame" class="left-font03" onClick="tupian('10');">员工工作情况查看</a></td>
-                </tr>
+
             </table>
 
             <!--  人员系统结束    -->
