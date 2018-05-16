@@ -3,7 +3,7 @@
  * @Author: Marte
  * @Date:   2018-05-08 10:48:58
  * @Last Modified by:   Marte
- * @Last Modified time: 2018-05-10 17:12:06
+ * @Last Modified time: 2018-05-16 10:42:08
  */
 namespace App\Http\Controllers\Admin;
 
@@ -30,7 +30,9 @@ public function login(Request $request){
             $session = new Session;
             $admin_id = $session->set("admin_id",$admindata['admin_id']);
             $session->set("admin_name",$admindata['admin_name']);
-            // $request->session()->put('admin_id', $admindata['admin_id']);
+            date_default_timezone_set('Asia/Shanghai');
+            $time = date("Y-m-d H:i:s");
+            $res = DB::update("UPDATE `book`.`book_admin_user` SET `admin_lastlogintime` = '$time' WHERE `admin_id` = $admindata[admin_id]");            // $request->session()->put('admin_id', $admindata['admin_id']);
             // $request->session()->put('admin_name', $admindata['admin_name']);
             // $request->session()->save();
             echo "<script>alert('登陆成功！');location.href='../'</script>";die;

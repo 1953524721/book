@@ -117,7 +117,7 @@ function link(){
                     <td align="center"><?= $value['admin_name']?></td>
                     <td align="center"><?= $value['admin_addtime']?></td>
                     <td align="center"><?= $value['admin_lastlogintime']?></td>
-                    <?php if($value['status']==0){ ?>
+                    <?php if($value['status']==1){ ?>
                     <td align="center"><font color="green" style="cursor: pointer" class="status"  p = "<?=$value['admin_id']?>" statu="0">启用</font></td>
                     <?php }else{ ?>
                     <td align="center"><font color="red" style="cursor: pointer" class="status"  p = "<?=$value['admin_id']?>" statu="1">未启用</font></td>
