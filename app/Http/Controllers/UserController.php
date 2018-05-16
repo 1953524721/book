@@ -12,7 +12,11 @@ class UserController extends Controller
     public function __construct()
     {
         $this->Session = new Session();
-
+        $id            = $this->Session->get("user_id");
+        if(empty($id))
+        {
+            echo "";
+        }
     }
     /*
      * @刘柯
@@ -132,7 +136,6 @@ class UserController extends Controller
             $log[$key]['book_name'] = $value['books_name'];
         }
         $log = json_decode(json_encode($log));
-
         return view("user/reading", array("log" => $log));
     }
     /*
@@ -146,6 +149,7 @@ class UserController extends Controller
         $user_id = $this->Session->get("user_id");
         $log['status']      = "3";
         $res                = DB::table("book_examine")->where("user_id",$user_id)
+                                                       ->where("book_id",$book_id)
                                                        ->update($log);
         if($res)
         {
@@ -226,7 +230,7 @@ class UserController extends Controller
      */
     public function borrowBooks()
     {
-        $book_id =  $this->xss($_GET['books_id']);
+        $book_id  =  $this->xss($_GET['books_id']);
         $user_id  = $this->Session->get("user_id");
         if(empty($user_id))
         {
@@ -243,13 +247,13 @@ class UserController extends Controller
         if(empty($examine))
         {
             $examine = DB::table("book_examine")->where("user_id",$user_id)
+
                                                 ->get();
-            if(count($examine)=="5")
+            if(count($examine)>="5")
             {
                 $arr = array(
                     "e"=>"4",
                     "m"=>"超过5本限制"
-
                 );
                 return $arr;
                 die();
