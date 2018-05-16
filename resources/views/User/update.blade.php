@@ -48,7 +48,7 @@
 </tr>
 <tr>
     <th width="300">手机号</th>
-    <td><input type="tel"  class="input-text lh30" name="iphone" placeholder="邮箱" id="phone" value="{{ $data->info_iphone}}">
+    <td><input type="tel"  class="input-text lh30" name="iphone" placeholder="邮箱" id="phone" value="{{ $data->info_iphone}}" disabled="disabled">
         <sapn class="phone"></sapn></td>
 </tr>
 <tr>

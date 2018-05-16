@@ -27,7 +27,9 @@ class UserController extends Controller
             die();
         }
         $data = DB::table("book_user_info")->where("user_id", $id)->first();
-        // print_r($data);die();
+        $userPhone = DB::table("book_user")->where("user_id", $id)->first();
+        //修改手机号为登录时手机号
+        $data->info_iphone =  $userPhone->user_phone;
         return view("user/info", array("data" => $data));
     }
 
@@ -45,10 +47,14 @@ class UserController extends Controller
             die();
         }
         $data = DB::table("book_user_info")->where("user_id", $id)->first();
+        //修改手机号为登录时手机号
+        $userPhone = DB::table("book_user")->where("user_id", $id)->first();
+        $data->info_iphone =  $userPhone->user_phone;
         if(empty($data))
         {
             return view("user/ins");
         }
+//        print_r($data);die;
         return view("user/update", array("data" => $data));
     }
     function xss($type)
