@@ -127,7 +127,6 @@ class UserController extends Controller
         {
             return view("user/die");die();
         }
-        print_r($book);die();
         foreach ($book as $key => $value)
         {
             $log[$key]['book_name'] = $value['books_name'];
