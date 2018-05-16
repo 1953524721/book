@@ -70,6 +70,7 @@ $user = new Session();
             <input type="radio" name="order" value="desc" <?php if($data['p']['order']=="desc"){echo "checked";} ?>>正序
             <input type="radio" name="order" value="asc" <?php if($data['p']['order']=="asc"){echo "checked";} ?>>倒叙
         </span>
+        <input type="hidden" name="classify" value="<?php echo $data['p']['classify']?>">
     </div>
     </form>
     <div id="templatemo_content">
