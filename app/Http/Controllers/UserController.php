@@ -12,11 +12,6 @@ class UserController extends Controller
     public function __construct()
     {
         $this->Session = new Session();
-        $id            = $this->Session->get("user_id");
-        if(empty($id))
-        {
-            echo "";
-        }
     }
     /*
      * @刘柯
@@ -26,6 +21,11 @@ class UserController extends Controller
     public function info()
     {
         $id = $this->Session->get("user_id");
+        if(empty($id))
+        {
+            echo "<script>alert('未登录');window.history.back(-1);</script>";
+            die();
+        }
         $data = DB::table("book_user_info")->where("user_id", $id)->first();
         // print_r($data);die();
         return view("user/info", array("data" => $data));
@@ -39,6 +39,11 @@ class UserController extends Controller
     public function update()
     {
         $id = $this->Session->get("user_id");
+        if(empty($id))
+        {
+            echo "<script>alert('未登录');window.history.back(-1);</script>";
+            die();
+        }
         $data = DB::table("book_user_info")->where("user_id", $id)->first();
         if(empty($data))
         {
@@ -63,6 +68,11 @@ class UserController extends Controller
     public function up(Request $request)
     {
         $id = $this->Session->get("user_id");
+        if(empty($id))
+        {
+            echo "<script>alert('未登录');window.history.back(-1);</script>";
+            die();
+        }
         $rest = $request->input();
         $data['info_birthday']  = $this->xss($rest['birthday']);
         $data['info_work']      = $this->xss($rest['work']);
@@ -91,6 +101,11 @@ class UserController extends Controller
     public function insd(Request $request)
     {
         $id = $this->Session->get("user_id");
+        if(empty($id))
+        {
+            echo "<script>alert('未登录');window.history.back(-1);</script>";
+            die();
+        }
         $rest = $request->input();
         $data['info_birthday']  = $this->xss($rest['birthday']);
         $data['info_work']      = $this->xss($rest['work']);
@@ -120,6 +135,11 @@ class UserController extends Controller
     public function reading()
     {
         $id = $this->Session->get("user_id");
+        if(empty($id))
+        {
+            echo "<script>alert('未登录');window.history.back(-1);</script>";
+            die();
+        }
         $log = json_decode(json_encode(DB::table("book_examine")->where("user_id",$id)->get()),true);
         foreach ($log as $key => $value)
         {
@@ -147,6 +167,11 @@ class UserController extends Controller
     {
         $book_id            = $this->xss($_POST['id']);
         $user_id = $this->Session->get("user_id");
+        if(empty($user_id))
+        {
+            echo "<script>alert('未登录');window.history.back(-1);</script>";
+            die();
+        }
         $log['status']      = "3";
         $res                = DB::table("book_examine")->where("user_id",$user_id)
                                                        ->where("book_id",$book_id)
@@ -187,6 +212,11 @@ class UserController extends Controller
     public function pwdUp()
     {
         $id = $this->Session->get("user_id");
+        if(empty($id))
+        {
+            echo "<script>alert('未登录');window.history.back(-1);</script>";
+            die();
+        }
         $data     = $_POST;
         $old_pwd  = $this->xss($data['old_pwd']);
         $new_pwd1 = $this->xss($data['new_pwd1']);
@@ -246,10 +276,8 @@ class UserController extends Controller
                                             ->first();
         if(empty($examine))
         {
-            $examine = DB::table("book_examine")->where("user_id",$user_id)
-
-                                                ->get();
-            if(count($examine)>="5")
+            $count = DB::select("SELECT * FROM book_examine WHERE user_id = '$user_id' AND status not in ('1','3')");
+            if(count($count)>="5")
             {
                 $arr = array(
                     "e"=>"4",

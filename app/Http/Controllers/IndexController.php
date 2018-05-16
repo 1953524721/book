@@ -18,23 +18,49 @@ class IndexController  extends Controller
         $this->Mode = new IndexModel();
     }
     public function index(){
-        $str =      $this->xss(Input::get("serch",""));
-        $classify =      $this->xss(Input::get("classify",""));
-        $order =      $this->xss(Input::get("order","desc"));
-        $page    =  $this->xss(Input::get("page",1));
-        $size = 6;
-        $count=getArray(DB::select("SELECT count(*) as num FROM book_books INNER JOIN book_classify ON book_books.classify_id=book_classify.classify_id WHERE book_books.books_status = 1"))[0]['num'];
-        $offset=($page-1)*$size;
+        $page    =      $this->xss(Input::get("page",1));
+        $str =          $this->xss(Input::get("serch",""));
+        $order   =      $this->xss(Input::get("order","desc"));
+        $classify   =      $this->xss(Input::get("classify","阿萨德"));
+        
+        $size    =       6;
+        $offset  =      ($page-1)*$size;
+
+        $count=getArray(DB::select("SELECT count(*) as num FROM book_books
+
+        INNER JOIN book_classify ON book_books.classify_id = book_classify.classify_id 
+
+        WHERE book_books.books_status = 1 and  book_books.books_name like '%$str%'
+
+        and book_classify.classify_name ='$classify'
+
+        ORDER BY book_books.add_time $order"))[0]['num'];
+        // print_r($count);die;
+
+
         $last=ceil($count/$size);
-        $up   = $page-1<1?1:$page-1;
-        $next   = $page+1>$last?$last:$page+1;
-        $bookArr =  $this->Mode->getBooks($offset,$size,$str,$order);
+        // print_r($last);die;
+        $up     =   $page-1<1?1:$page-1;
+        // print_r($up);die;
+        $next   =   $page+1>$last?$last:$page+1;
+
+        $bookArr =  $this->Mode->getBooks($offset,$size,$str,$order,$classify);
+
+        foreach ($bookArr['books'] as $key => $val) {
+            $bookArr['books'][$key]['books_name']  =  str_replace($str,"<font color='green'>$str</font>",$val['books_name']);  
+;
+
+        }
+        // print_r($bookArr['books']);die;
         $bookArr['p']['first'] =1;
         $bookArr['p']['last'] =$last;
         $bookArr['p']['up'] =      $up;
         $bookArr['p']['next']  =  $next;
         $bookArr['p']['serch'] = $str;
         $bookArr['p']['order'] = $order;
+        $bookArr['p']['classify'] = $classify;
+        // $bookArr['p']['class'] = $order;
+        // print_r($bookArr);die;
         return view("Index",["data"=>$bookArr]);
     }
 

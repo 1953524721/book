@@ -56,7 +56,7 @@ class BookController extends ComController{
         if($request->isMethod("post")){
             $name = isset($request->input()['name'])?$request->input()['name']:"";
             $page=isset($_GET['page'])?$_GET['page'] : 1;
-            $size=2;
+            $size=10;
             $offset=($page-1)*$size;
             $first=1;
             $up=$page-1<0?1:$page-1;
