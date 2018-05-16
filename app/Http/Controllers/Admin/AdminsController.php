@@ -3,7 +3,7 @@
  * @Author: Marte
  * @Date:   2018-05-10 10:04:34
  * @Last Modified by:   Marte
- * @Last Modified time: 2018-05-11 15:13:06
+ * @Last Modified time: 2018-05-16 10:41:37
  */
 namespace App\Http\Controllers\Admin;
 
@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Admin\ComController;
 use App\Model\Admin\AdminsModel;
+
 
 class AdminsController extends ComController{
     public function add(Request $request){
@@ -49,6 +50,7 @@ class AdminsController extends ComController{
 
 
     public function show(){
+
         $data=getArray(DB::select('SELECT * FROM book_admin_user'));
         // print_r($data);die;
         return view('Admin.Admins.show',array('data'=> $data));
