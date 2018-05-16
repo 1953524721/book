@@ -242,13 +242,12 @@ class UserController extends Controller
             die();
         }
         $examine = DB::table("book_examine")->where("user_id",$user_id)
-                                            ->where("book_id",$book_id)
-                                            ->first();
+            ->where("book_id",$book_id)
+            ->first();
         if(empty($examine))
         {
-            $examine = DB::table("book_examine")->where("user_id",$user_id)
-
-                                                ->get();
+            $examine = DB::select("SELECT * FROM book_examine WHERE user_id = '$user_id'
+                                    AND status not in ('1','3')");
             if(count($examine)>="5")
             {
                 $arr = array(
@@ -290,4 +289,6 @@ class UserController extends Controller
             return $arr;
         }
     }
+
+
 }

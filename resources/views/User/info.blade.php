@@ -11,7 +11,6 @@
         body{background-color: #F2EBE5}
         tr,td{height: 50px;}
         .color{color: red}
-        .a_21{float: right;width: 50px;height: 50px;background-color: red}
     </style>
 </head>
 <body>
@@ -26,11 +25,11 @@
 			
 			
 		</table>
-<!--
+
         <div class="a_21"><span style="cursor: pointer;color: red" class="pwd">修改密码</span></div>
         <div class="a_21"><span style="cursor: pointer" class="jie">借书历史</span></div>
         <div class="a_21"><span style="cursor: pointer"></span></div>
--->
+
     </div>
 </div>
 <div id="table" class="mt10">
