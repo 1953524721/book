@@ -73,6 +73,6 @@
 </center>
 </body>
 <script language="JavaScript" src="{{ URL::asset('/') }}jq.js"></script>
-<script type="text/javascript" src="{{URL::asset('/')}}js/update.js"></script>
+{{--<script type="text/javascript" src="{{URL::asset('/')}}js/update.js"></script>--}}
 </html>
 

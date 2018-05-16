@@ -19,7 +19,7 @@ class RegisterModel extends Model
         return $res;
     }
     public function insertUser($arr){
-        $res = DB::table('book_user')->insert($arr);
+        $res = DB::table('book_user')->insertGetId($arr);
         return  $res;
     }
     public function upPcode($code_id){

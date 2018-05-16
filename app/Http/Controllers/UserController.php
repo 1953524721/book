@@ -79,12 +79,14 @@ class UserController extends Controller
             echo "<script>alert('未登录');window.history.back(-1);</script>";
             die();
         }
+
         $rest = $request->input();
+//        print_r($rest);die;
         $data['info_birthday']  = $this->xss($rest['birthday']);
         $data['info_work']      = $this->xss($rest['work']);
         $data['info_school']    = $this->xss($rest['school']);
         $data['info_email']     = $this->xss($rest['eamil']);
-        $data['info_iphone']    = $this->xss($rest['iphone']);
+//        $data['info_iphone']    = $this->xss($rest['iphone']);
         $data['info_autograph'] = $this->xss($rest['autograph']);
         $data['info_explain']   = $this->xss($rest['explain']);
         date_default_timezone_set("PRC");
