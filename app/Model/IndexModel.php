@@ -14,10 +14,9 @@ class IndexModel extends Model
         
         WHERE book_books.books_status = 1 and  book_books.books_name like '%$str%'
 
-        and book_classify.classify_name ='$classify'
-        
+        and book_classify.classify_id = $classify
+         
         ORDER BY book_books.add_time $order LIMIT $offset,$size");
-
 
         $classify   = DB::table("book_classify")->get();
         $books =     json_decode(json_encode($res),true);

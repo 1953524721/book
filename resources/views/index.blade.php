@@ -81,7 +81,7 @@ $user = new Session();
                 <ul>
                 <!-- 此处遍历图书分类 -->
                     <?php foreach ($data['classify'] as $key=>$val){ ?>
-                    <li><a href="?classify=<?php echo $val['classify_name']?>"><?= $val['classify_name']?></a></li>
+                    <li><a href="?classify=<?php echo $val['classify_id']?>"><?= $val['classify_name']?></a></li>
                     <?php  } ?>
                 </ul>
             </div>

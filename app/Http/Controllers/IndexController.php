@@ -19,11 +19,18 @@ class IndexController  extends Controller
     }
     public function index(){
         $page    =      $this->xss(Input::get("page",1));
+
         $str =          $this->xss(Input::get("serch",""));
+
         $order   =      $this->xss(Input::get("order","desc"));
-        $classify   =      $this->xss(Input::get("classify","阿萨德"));
+
+        $classify   = DB::table("book_classify")->first();
+        // print_r();die;
+
+        $classify   =      $this->xss(Input::get("classify",$classify->classify_id));
         
         $size    =       6;
+
         $offset  =      ($page-1)*$size;
 
         $count=getArray(DB::select("SELECT count(*) as num FROM book_books
@@ -32,7 +39,7 @@ class IndexController  extends Controller
 
         WHERE book_books.books_status = 1 and  book_books.books_name like '%$str%'
 
-        and book_classify.classify_name ='$classify'
+        and book_classify.classify_id =$classify
 
         ORDER BY book_books.add_time $order"))[0]['num'];
         // print_r($count);die;
