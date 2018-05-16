@@ -80,7 +80,7 @@ $user = new Session();
                 <ul>
                 <!-- 此处遍历图书分类 -->
                     <?php foreach ($data['classify'] as $key=>$val){ ?>
-                    <li><a href="javascript:void(0)"><?= $val['classify_name']?></a></li>
+                    <li><a href="?classify=<?php echo $val['classify_name']?>"><?= $val['classify_name']?></a></li>
                     <?php  } ?>
                 </ul>
             </div>
@@ -110,10 +110,10 @@ $user = new Session();
             <?php } ?>
             <div class="cleaner_with_height">&nbsp;</div>
         <div style="height: 50px;  line-height: 50px; text-align: center;" id="pagediv">
-            <a href="?page=<?php echo $data['p']['first'] ?>&serch=<?php echo $data['p']['serch'] ?>&order=<?php echo $data['p']['order'] ?>">首页</a>
-            <a href="?page=<?php echo $data['p']['up'] ?>&serch=<?php echo $data['p']['serch'] ?>&order=<?php echo $data['p']['order'] ?>" >上一页</a>
-            <a href="?page=<?php echo $data['p']['next'] ?>&serch=<?php echo $data['p']['serch'] ?>&order=<?php echo $data['p']['order'] ?>" >下一页</a>
-            <a href="?page=<?php echo $data['p']['last'] ?>&serch=<?php echo $data['p']['serch'] ?>&order=<?php echo $data['p']['order'] ?>">尾页</a>
+            <a href="?page=<?php echo $data['p']['first'] ?>&serch=<?php echo $data['p']['serch'] ?>&order=<?php echo $data['p']['order'] ?>&classify=<?php echo $data['p']['classify'] ?>">首页</a>
+            <a href="?page=<?php echo $data['p']['up'] ?>&serch=<?php echo $data['p']['serch'] ?>&order=<?php echo $data['p']['order'] ?>&classify=<?php echo $data['p']['classify'] ?>" >上一页</a>
+            <a href="?page=<?php echo $data['p']['next'] ?>&serch=<?php echo $data['p']['serch'] ?>&order=<?php echo $data['p']['order'] ?>&classify=<?php echo $data['p']['classify'] ?>" >下一页</a>
+            <a href="?page=<?php echo $data['p']['last'] ?>&serch=<?php echo $data['p']['serch'] ?>&order=<?php echo $data['p']['order'] ?>&classify=<?php echo $data['p']['classify'] ?>">尾页</a>
         </div>
             <!-- a href="subpage.html"><img src="{{asset('index/images/templatemo_ads.jpg')}}" alt="ads" /></a> -->
         </div> <!-- end of content right -->
