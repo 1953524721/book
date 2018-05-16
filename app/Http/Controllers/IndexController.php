@@ -45,7 +45,13 @@ class IndexController  extends Controller
         $next   =   $page+1>$last?$last:$page+1;
 
         $bookArr =  $this->Mode->getBooks($offset,$size,$str,$order,$classify);
-        //print_r($bookArr);die;
+
+        foreach ($bookArr['books'] as $key => $val) {
+            $bookArr['books'][$key]['books_name']  =  str_replace($str,"<font color='green'>$str</font>",$val['books_name']);  
+;
+
+        }
+        // print_r($bookArr['books']);die;
         $bookArr['p']['first'] =1;
         $bookArr['p']['last'] =$last;
         $bookArr['p']['up'] =      $up;
