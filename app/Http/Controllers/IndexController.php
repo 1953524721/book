@@ -18,32 +18,37 @@ class IndexController  extends Controller
         $this->Mode = new IndexModel();
     }
     public function index(){
-        $str =      $this->xss(Input::get("serch",""));
-        $classify =      $this->xss(Input::get("classify",""));
-        $order =      $this->xss(Input::get("order","desc"));
-        $page    =  $this->xss(Input::get("page",1));
-        $size = 6;
-              $offset=($page-1)*$size;
+        $page    =      $this->xss(Input::get("page",1));
+        $str =          $this->xss(Input::get("serch",""));
+        $order   =      $this->xss(Input::get("order","desc"));
+        $size    =       6;
+        $offset  =      ($page-1)*$size;
+
         $count=getArray(DB::select("SELECT count(*) as num FROM book_books
 
-INNER JOIN book_classify ON book_books.classify_id = book_classify.classify_id 
-        
-WHERE book_books.books_status = 1 and  book_books.books_name like '%$str%'
-        
-ORDER BY book_books.add_time $order LIMIT $offset,$size"))[0]['num'];
+        INNER JOIN book_classify ON book_books.classify_id = book_classify.classify_id 
+
+        WHERE book_books.books_status = 1 and  book_books.books_name like '%$str%'
+
+        ORDER BY book_books.add_time $order"))[0]['num'];
+        // print_r($count);die;
 
 
-  
         $last=ceil($count/$size);
-        $up   = $page-1<1?1:$page-1;
-        $next   = $page+1>$last?$last:$page+1;
+        // print_r($last);die;
+        $up     =   $page-1<1?1:$page-1;
+        // print_r($up);die;
+        $next   =   $page+1>$last?$last:$page+1;
+
         $bookArr =  $this->Mode->getBooks($offset,$size,$str,$order);
+        //print_r($bookArr);die;
         $bookArr['p']['first'] =1;
         $bookArr['p']['last'] =$last;
         $bookArr['p']['up'] =      $up;
         $bookArr['p']['next']  =  $next;
         $bookArr['p']['serch'] = $str;
         $bookArr['p']['order'] = $order;
+        // print_r($bookArr);die;
         return view("Index",["data"=>$bookArr]);
     }
 
