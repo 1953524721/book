@@ -106,9 +106,9 @@
                                                 <td bgcolor="#FFFFFF"><?= $val['books_info']?></td>
                                                 <td bgcolor="#FFFFFF" align="center"><?= $val['add_time']?></td>
                                                 <?php if($val['books_status']==1){?>
-                                                <td bgcolor="#FFFFFF" align="center"><a href="javascript:void(0)">下架</a></td>
-                                                <?php }else{?>
                                                 <td bgcolor="#FFFFFF" align="center"><a href="javascript:void(0)">上架</a></td>
+                                                <?php }else{?>
+                                                <td bgcolor="#FFFFFF" align="center"><a href="javascript:void(0)">下架</a></td>
                                                 <?php }?>
                                                 <td bgcolor="#FFFFFF" align="center"><a href="{{url('admin/Book/update')}}?books_id=<?= $val['books_id']?>">编辑</a></td>
                                             </tr>
