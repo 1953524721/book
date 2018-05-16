@@ -318,4 +318,9 @@ class UserController extends Controller
             return $arr;
         }
     }
+    public function exitUser(){
+        session_start();
+        session_destroy();
+        exit("<script>alert('退出成功');location.href='../'</script>");
+    }
 }
