@@ -141,9 +141,14 @@ class UserController extends Controller
             die();
         }
         $log = json_decode(json_encode(DB::table("book_examine")->where("user_id",$id)->get()),true);
+        if(empty($log)){
+            echo "<script>alert('未有借阅');window.history.back(-1);</script>";
+            die();
+        }
         foreach ($log as $key => $value)
         {
             $book_id[] = $value['book_id'];
+            
         }
 
         $book = json_decode(json_encode(DB::table("book_books")->whereIn("books_id", $book_id)->get()), true);

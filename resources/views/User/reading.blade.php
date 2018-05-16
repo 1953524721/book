@@ -33,7 +33,7 @@
             <td>
                @if($row->status == 0)
                     <span class="status" p="{{$row->book_id}}" style="cursor: pointer">申请还书</span>
-               @elseif($row->status == 2)
+               @elseif($row->status == 3)
                     <span class="status">归还等待管理员审核</span>
                    @else
                     <span class="statu">已还</span>
