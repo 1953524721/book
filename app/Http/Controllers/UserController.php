@@ -274,6 +274,7 @@ class UserController extends Controller
     public function borrowBooks()
     {
         $book_id  =  $this->xss($_GET['books_id']);
+//        $book_id  = "137";
         $user_id  = $this->Session->get("user_id");
         if(empty($user_id))
         {
@@ -284,9 +285,25 @@ class UserController extends Controller
             return $arr;
             die();
         }
-        $examine = DB::table("book_examine")->where("user_id",$user_id)
-                                            ->where("book_id",$book_id)
-                                            ->first();
+        $book_num = DB::select("SELECT `books_num` FROM `book_books` WHERE `books_id` = $book_id");
+        $book_num = json_decode(json_encode($book_num),true);
+
+        foreach ($book_num as $key =>$value)
+        {
+            $book_num = $value['books_num'];
+        }
+        if(!$book_num>0)
+        {
+            $arr = array(
+                "e"=>"5",
+                "m"=>"没书了，等等吧"
+            );
+            return $arr;die();
+        }
+        $examine  = DB::table("book_examine")->where("user_id",$user_id)
+                                             ->where("book_id",$book_id)
+
+                                             ->first();
         if(empty($examine))
         {
             $count = DB::select("SELECT * FROM book_examine WHERE user_id = '$user_id' AND status not in ('1','3')");
@@ -305,12 +322,22 @@ class UserController extends Controller
             $res =  DB::table("book_examine")->insert($insert);
             if($res)
             {
-                $arr = array(
-                    "e"=>"0",
-                    "m"=>"借书成功"
-                );
-                $arr = json_encode($arr);
-                return $arr;
+                $updata = json_decode(json_encode(DB::table("book_books")->where("books_id",$book_id)->first()),true);
+                $update['books_num'] = $updata['books_num']-1;
+                $up   = DB::table("book_books")->where("books_id",$book_id)->update($update);
+                if($up)
+                {
+                    $arr = array(
+                        "e"=>"6",
+                        "m"=>"借书成功"
+                    );
+                    $arr = json_encode($arr);
+                    return $arr;
+                }
+                else
+                {
+
+                }
             }
             else
             {
