@@ -328,7 +328,7 @@ class UserController extends Controller
                 if($up)
                 {
                     $arr = array(
-                        "e"=>"6",
+                        "e"=>"0",
                         "m"=>"借书成功"
                     );
                     $arr = json_encode($arr);

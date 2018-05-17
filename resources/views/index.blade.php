@@ -153,8 +153,8 @@ $user = new Session();
                 // console.log(msg);
                 if(msg.e==0){
                     alert(msg.m)
-                    location.href=""
-                    return
+                     location.href="./";
+                     return;
                 }
                 if(msg.e==3){
                     alert(msg.m)
