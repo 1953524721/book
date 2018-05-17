@@ -119,6 +119,7 @@ Route::post("user/exaup","UserController@exaup");
 Route::post("user/pwdUp","UserController@pwdUp");
 Route::any("user/borrowBooks","UserController@borrowBooks");
 
+Route::get("user/exitUser","UserController@exitUser");
 
 
 

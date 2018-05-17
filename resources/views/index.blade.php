@@ -35,6 +35,7 @@ $user = new Session();
             <?php }else{ ?>
             <li><a href="" class="current">欢迎<font color="red"><?php echo $user->get("user_name")  ?></font></a></li>
             <li><a href="{{('user/info')}}">个人中心</a></li>
+            <li><a href="{{('user/exitUser')}}">退出</a></li>
             <?php } ?>
         </ul>
     </div>

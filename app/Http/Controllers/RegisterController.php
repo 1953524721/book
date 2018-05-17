@@ -95,11 +95,18 @@ class RegisterController  extends Controller {
             "user_phone"=>$post['pNum'],
             "user_pwd"=>strrev(md5(hash("sha512",$post['user_pwd'])))
         );
-        //入库
+//        DB::
+
+
         $res =  $this->Model->insertUser($insert);
+//        print_r($res);die;
+//        $id = DB::table('book_user')->insertGetId();
+//        print_r($id);die;
+
         if($res){
             //修改验证码状态
             $this->Model-> upPcode($getCode->code_id);
+            DB::table('book_user_info')->insert(array("user_id"=>$res));
             exit(json_encode(array("e"=>"1","m"=>"注册成功")));
         }else{
             exit(json_encode(array("e"=>"2","m"=>"注册失败")));

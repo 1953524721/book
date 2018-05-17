@@ -27,7 +27,9 @@ class UserController extends Controller
             die();
         }
         $data = DB::table("book_user_info")->where("user_id", $id)->first();
-        // print_r($data);die();
+        $userPhone = DB::table("book_user")->where("user_id", $id)->first();
+        //修改手机号为登录时手机号
+        $data->info_iphone =  $userPhone->user_phone;
         return view("user/info", array("data" => $data));
     }
 
@@ -45,10 +47,14 @@ class UserController extends Controller
             die();
         }
         $data = DB::table("book_user_info")->where("user_id", $id)->first();
+        //修改手机号为登录时手机号
+        $userPhone = DB::table("book_user")->where("user_id", $id)->first();
+        $data->info_iphone =  $userPhone->user_phone;
         if(empty($data))
         {
             return view("user/ins");
         }
+//        print_r($data);die;
         return view("user/update", array("data" => $data));
     }
     function xss($type)
@@ -73,12 +79,14 @@ class UserController extends Controller
             echo "<script>alert('未登录');window.history.back(-1);</script>";
             die();
         }
+
         $rest = $request->input();
+//        print_r($rest);die;
         $data['info_birthday']  = $this->xss($rest['birthday']);
         $data['info_work']      = $this->xss($rest['work']);
         $data['info_school']    = $this->xss($rest['school']);
         $data['info_email']     = $this->xss($rest['eamil']);
-        $data['info_iphone']    = $this->xss($rest['iphone']);
+//        $data['info_iphone']    = $this->xss($rest['iphone']);
         $data['info_autograph'] = $this->xss($rest['autograph']);
         $data['info_explain']   = $this->xss($rest['explain']);
         date_default_timezone_set("PRC");
@@ -141,9 +149,14 @@ class UserController extends Controller
             die();
         }
         $log = json_decode(json_encode(DB::table("book_examine")->where("user_id",$id)->get()),true);
+        if(empty($log)){
+            echo "<script>alert('未有借阅');window.history.back(-1);</script>";
+            die();
+        }
         foreach ($log as $key => $value)
         {
             $book_id[] = $value['book_id'];
+            
         }
 
         $book = json_decode(json_encode(DB::table("book_books")->whereIn("books_id", $book_id)->get()), true);
@@ -317,5 +330,10 @@ class UserController extends Controller
             );
             return $arr;
         }
+    }
+    public function exitUser(){
+        session_start();
+        session_destroy();
+        exit("<script>alert('退出成功');location.href='../'</script>");
     }
 }
