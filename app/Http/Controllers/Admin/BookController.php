@@ -13,7 +13,7 @@ class BookController extends ComController{
         if($request->isMethod("post")){
             $data = $request->input();
             $file = $request->file('pic');
-            $allowed_extensions = ["png", "jpg", "gif"];
+            $allowed_extensions = ["png", "jpg", "gif","jpeg","JPG"];
             if ($file->getClientOriginalExtension() && !in_array($file->getClientOriginalExtension(), $allowed_extensions)) {
                 return ['error' => 'You may only upload png, jpg or gif.'];
             }
